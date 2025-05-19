@@ -1,26 +1,33 @@
 package com.juancho.artistas.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.juancho.artistas.enums.TipoContrato;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 
-
+@Table("disquera")
 public class Disquera {
 
     @Id
     private Integer id;
+
+    @Column("nombreDisquera")
     private String nombreDisquera;
+
     private String pais;
+
+    @Column("numeroArtistas")
     private Integer numeroArtistas;
-    private LocalDateTime fundacion;
+    private LocalDate fundacion;
     private TipoContrato contrato;
 
     public  Disquera() {}
 
-    public Disquera(String nombreDisquera, String pais, Integer numeroArtistas, LocalDateTime fundacion,
+    public Disquera(String nombreDisquera, String pais, Integer numeroArtistas, LocalDate fundacion,
                     TipoContrato contrato) {
 
         super();
@@ -63,11 +70,11 @@ public class Disquera {
         this.numeroArtistas = numeroArtistas;
     }
 
-    public LocalDateTime getFundacion() {
+    public LocalDate getFundacion() {
         return fundacion;
     }
 
-    public void setFundacion(LocalDateTime fundacion) {
+    public void setFundacion(LocalDate fundacion) {
         this.fundacion = fundacion;
     }
 

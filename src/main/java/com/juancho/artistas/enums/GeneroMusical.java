@@ -9,3 +9,4 @@ public enum GeneroMusical{
     SALSA,
     HIPHOP
 }
+//ENUM('POP', 'ROCK', 'RAP', 'REGGAETON', 'ELECTRONICA', 'SALSA','HIPHOP')

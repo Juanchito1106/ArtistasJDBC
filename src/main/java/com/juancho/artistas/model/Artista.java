@@ -1,11 +1,9 @@
 package com.juancho.artistas.model;
 
 import java.time.LocalDateTime;
-
 import com.juancho.artistas.enums.GeneroMusical;
 import org.springframework.data.annotation.Id;
-
-
+import java.time.LocalDate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -16,18 +14,31 @@ public class Artista {
 
     @Id
     private Integer id;
+
+    @Column("nombreArtistico")
     private String nombreArtistico;
     private Integer edad;
-    private LocalDateTime fechaNacimiento;
+
+    @Column("fechaNacimiento")
+    private LocalDate fechaNacimiento;
     private String nacionalidad;
     private GeneroMusical genero;
 
     @Column("disqueraid")
     private AggregateReference<Disquera,Integer> disqueraid;
 
+
+    public AggregateReference<Disquera, Integer> getDisquera() {
+        return disqueraid;
+    }
+
+    public void setDisquera(AggregateReference<Disquera, Integer> disqueraid) {
+        this.disqueraid = disqueraid;
+    }
+
     public Artista() {}
 
-    public Artista(String nombreArtistico, Integer edad, LocalDateTime fechaNacimiento, String nacionalidad, GeneroMusical genero) {
+    public Artista(String nombreArtistico, Integer edad, LocalDate fechaNacimiento, String nacionalidad, GeneroMusical genero) {
 
         super();
         this.nombreArtistico = nombreArtistico;
@@ -61,11 +72,11 @@ public class Artista {
         this.edad = edad;
     }
 
-    public LocalDateTime getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
