@@ -2,6 +2,8 @@ package com.juancho.artistas.model;
 
 import java.time.LocalDateTime;
 import com.juancho.artistas.enums.GeneroMusical;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -15,8 +17,12 @@ public class Artista {
     @Id
     private Integer id;
 
+    @NotBlank(message= "Name is required")
+    @Size(min= 5, max=80, message ="Name must be between 5 and 80 characters")
     @Column("nombreArtistico")
     private String nombreArtistico;
+
+
     private Integer edad;
 
     @Column("fechaNacimiento")
@@ -26,7 +32,6 @@ public class Artista {
 
     @Column("disqueraid")
     private AggregateReference<Disquera,Integer> disqueraid;
-
 
     public AggregateReference<Disquera, Integer> getDisquera() {
         return disqueraid;

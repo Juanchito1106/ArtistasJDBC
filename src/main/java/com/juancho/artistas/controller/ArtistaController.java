@@ -61,4 +61,19 @@ public class ArtistaController {
         return "exito";
     }
 
+    //Para ir al menu de las canciones
+//        @GetMapping
+//        public String menuCanciones(Model model) {
+//            model.addAttribute("Artista", ArtistasRepositorio.findAll());
+//            return "MenuCanciones"; // nombre del HTML
+//        }
+
+    //Para agregar una nueva CANCIÓN según el id del ARTISTA
+//        @GetMapping
+//        public String menuCanciones(Model model) {
+//            model.addAttribute("Artista", ArtistasRepositorio.findAll());
+//            return "MenuCanciones"; // nombre del HTML
+//        }
+
+
 }

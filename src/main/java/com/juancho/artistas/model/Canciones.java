@@ -1,10 +1,9 @@
 package com.juancho.artistas.model;
 
 import java.time.LocalDateTime;
-
 import com.juancho.artistas.enums.EstadoCancion;
 import org.springframework.data.annotation.Id;
-
+import org.springframework.data.annotation.Transient;
 
 
 public class Canciones {
@@ -17,9 +16,12 @@ public class Canciones {
     private Integer reproducciones;
     private EstadoCancion estado;
 
+    //Uno a muchos
+    @Transient //Se guarda como referencia, los datos  del artista con su id
+    Artista artista;
 
     public Canciones() {
-        super();
+
     }
 
 

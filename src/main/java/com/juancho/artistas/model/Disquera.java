@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.juancho.artistas.enums.TipoContrato;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -15,6 +17,8 @@ public class Disquera {
     @Id
     private Integer id;
 
+    @NotBlank(message= "Name is required")
+    @Size (min= 10, max=80, message ="Name must be between 10 and 80 characters")
     @Column("nombreDisquera")
     private String nombreDisquera;
 
