@@ -4,13 +4,18 @@ import java.time.LocalDateTime;
 import com.juancho.artistas.enums.EstadoCancion;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
 
 
 public class Canciones {
 
     @Id
     private Integer id;
+
+    @Column("nombreCancion")
     private String nombreCancion;
+
+    @Column("fechaSalida")
     private LocalDateTime fechaSalida;
     private Integer duracion; //duración en minutos
     private Integer reproducciones;
@@ -19,6 +24,7 @@ public class Canciones {
     //Uno a muchos
     @Transient //Se guarda como referencia, los datos  del artista con su id
     Artista artista;
+
 
     public Canciones() {
 

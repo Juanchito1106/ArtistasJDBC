@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar canción</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Menu Canciones</h1>
+<table>
+    <tr>
+        <th>Id Artista</th>
+        <th>Nombre del Artista</th>
+        <th>Agregar Canción</th>
+        <th>Ver Canciones</th>
+    </tr>
+    <th:block th:each="a : ${artistas}">
+        <tr>
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.nombreArtistico}"></td>
+            <td><button><a th:href="@{|/artistas/agregarCancion/${a.id}|}">Agregar canción</a></button></td>
+            <td><button><a th:href="@{|/artistas/verCancion/${a.id}|}">Ver canciones</a></button></td>
+        </tr>
+    </th:block>
+</table>
+<br>
+<form method="get" action="/artistas/listarArtistas">
+    <button>Volver</button>
+</form></td>
+
+</body>
+</html>

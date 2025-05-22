@@ -6,6 +6,6 @@ public enum EstadoCancion {
     PUBLICADA,
     INEDITA,
     DEMO,
-    SUSPENDIDA //hola
+    SUSPENDIDA
 
 }

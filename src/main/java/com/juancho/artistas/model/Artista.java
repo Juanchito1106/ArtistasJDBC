@@ -6,6 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -22,12 +26,17 @@ public class Artista {
     @Column("nombreArtistico")
     private String nombreArtistico;
 
-
+    @NotBlank(message= "Age is required")
     private Integer edad;
 
+    @NotBlank(message= "Date is required")
     @Column("fechaNacimiento")
     private LocalDate fechaNacimiento;
+
+    @NotBlank(message= "Nacionality is required")
+    @Size(min= 5, max=80, message ="Nacionality must be between 5 and 80 characters")
     private String nacionalidad;
+
     private GeneroMusical genero;
 
     @Column("disqueraid")
@@ -40,6 +49,40 @@ public class Artista {
     public void setDisquera(AggregateReference<Disquera, Integer> disqueraid) {
         this.disqueraid = disqueraid;
     }
+
+
+    // one to one
+    private AggregateReference<Artista,Integer> artistaid;
+
+    // one to many
+    // le llega el muchos
+    private Set<Canciones> canciones = new HashSet<>();
+
+    //Uno a muchos
+    // le llega el one
+    @Transient //Se guarda como referencia, los datos  del artista con su id
+    Artista artista;
+    public Set<Canciones> getCanciones() {
+        return canciones;
+    }
+
+    public void setCanciones(Set<Canciones> canciones) {
+        this.canciones = canciones;
+    }
+
+    public void addCancion(Canciones cancion) {
+        canciones.add(cancion);
+        cancion.artista = this;
+    }
+
+    public AggregateReference<Artista, Integer> getArtista() {
+        return artistaid;
+    }
+
+    public void setArtista(AggregateReference<Artista, Integer> artistaid) {
+        this.artistaid = artistaid;
+    }
+
 
     public Artista() {}
 

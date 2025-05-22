@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Artistas Registrados</title>
+  <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Artistas</h1>
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Nombre Artístico</th>
+    <th>Edad</th>
+    <th>Date</th>
+    <th>Nacionalidad</th>
+    <th>Género</th>
+  </tr>
+  <th:block th:each="a : ${artistas}">
+    <tr>
+      <td th:text="${a.id}"></td>
+      <td th:text="${a.nombreArtistico}"></td>
+      <td th:text="${a.edad}"></td>
+      <td th:text="${a.fechaNacimiento}"></td>
+      <td th:text="${a.nacionalidad}"></td>
+      <td th:text="${a.genero}"></td>
+      <td><button><a th:href="@{|/artistas/verDisquera/${a.getDisquera().getId()}|}">Ver Disquera</a></button></td>
+
+    </tr>
+  </th:block>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <form method="get" action="/artistas">
+        <button>Volver</button>
+      </form>
+    </td>
+    <td>
+      <form method="get" action="/artistas/canciones">
+        <button>Canciones</button>
+      </form>
+    </td>
+  </tr>
+</table>
+
+
+
+</body>
+</html>

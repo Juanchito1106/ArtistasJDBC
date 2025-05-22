@@ -4,7 +4,9 @@ body  {
 }
 
 
-button {
+button,
+#btn-artista/*Boton para redigir a la ventana que muestra los artistas*/
+    {
 
     width: 10%;
     background-color: #1e4705;
@@ -17,7 +19,9 @@ button {
 
 }
 
-button:hover{
+
+button:hover,
+#btn-artista:hover{
 
     background-color: #1e4705;
     cursor: pointer;
@@ -55,11 +59,20 @@ select:hover{
     height: 54px;
 }
 
+/*Boton para redigir a la ventana que muestra los artistas*/
 #btn-artista{
 
+    /*width: 130%;*/
     margin-left: 15px;
+    height: 54px;
+    display: flex;
+    justify-content: center;  /* Para centrar horizontalmente los elementos (el texto) */
+    align-items: center;      /* Y este para centrar verticalmente los elementos */
 
 }
+
+
+
 
 .botones {
     display: flex;

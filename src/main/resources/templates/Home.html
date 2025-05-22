@@ -11,7 +11,6 @@
 </head>
 <body>
 
-
 <form th:action="@{/artistas/ingresar}" method="post" th:object="${dto}" class="mt-4">
 
     <!-- Artista -->
@@ -54,7 +53,7 @@
     <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}" ><br/><br/>
 
     <label>País: </label>
-    <input name="pais" type="number" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
+    <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
 
     <label>Número de artistas: </label>
     <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}" ><br/><br/>
@@ -74,7 +73,7 @@
 
     <div class="botones">
         <button id="registro" name="registrar" type="submit">Registrar</button>
-        <button id="btn-artista" name="Crear_Artista" type="submit">Crear solo un Artista</button>
+        <a href="/artistas/listarArtistas" id="btn-artista">Ver Artistas</a>
     </div>
 
 </form>

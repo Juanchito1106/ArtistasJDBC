@@ -1,18 +1,20 @@
 package com.juancho.artistas.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import com.juancho.artistas.enums.EstadoCancion;
 import com.juancho.artistas.model.Artista;
+import com.juancho.artistas.model.Canciones;
 import com.juancho.artistas.model.Disquera;
 import com.juancho.artistas.model.RegistroDTO;
 import com.juancho.artistas.repositories.ArtistasRepositorio;
 import com.juancho.artistas.repositories.DisqueraRepositorio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/artistas")
@@ -58,22 +60,59 @@ public class ArtistaController {
 
         artistaRepo.save(artista);
 
-        return "exito";
+        return "registroExitoso";
     }
 
-    //Para ir al menu de las canciones
-//        @GetMapping
-//        public String menuCanciones(Model model) {
-//            model.addAttribute("Artista", ArtistasRepositorio.findAll());
-//            return "MenuCanciones"; // nombre del HTML
-//        }
+    @GetMapping("/listarArtistas")
+    public String listarArtistas(Model model) {
+        model.addAttribute("artistas", artistaRepo.findAll());
+        return "verArtistas";
+    }
 
-    //Para agregar una nueva CANCIÓN según el id del ARTISTA
-//        @GetMapping
-//        public String menuCanciones(Model model) {
-//            model.addAttribute("Artista", ArtistasRepositorio.findAll());
-//            return "MenuCanciones"; // nombre del HTML
-//        }
+    @GetMapping("/verDisquera/{id}")
+    public String verDisquera(Model model, @PathVariable Integer id) {
+        Optional<Disquera> disqueraOpt = disqueraRepo.findById(id);
+        Disquera disquera = disqueraOpt.orElse(new Disquera());
+        model.addAttribute("disquera", disquera);
+        return "verDisqueras";
+    }
 
+//    Para ir al menu de las canciones
+        @GetMapping("/menuCanciones")
+        public String menuCanciones(Model model) {
+            model.addAttribute("artistas", artistaRepo.findAll());
+            return "menuCanciones"; // nombre del HTML
+        }
+
+//    Para agregar una nueva CANCIÓN según el id del ARTISTA
+        @GetMapping("/agregarCancion/{id}")
+        public String agregarCancion(Model model,  @PathVariable Integer id) {
+            model.addAttribute("idArtista", id);
+            return "menuCanciones"; // nombre del HTML
+        }
+
+
+        @PostMapping("/agregarCancion")
+        public String nuevaCancion(
+                @RequestParam(required=true, name ="idArtista") Integer idArtista,
+                @RequestParam(required=true, name ="nombreCancion") String nombreCancion,
+                @RequestParam(required=true, name ="fechaSalida") String fechaSalida,
+                @RequestParam(required=true, name ="duracion") Integer duracion,
+                @RequestParam(required=true, name ="reproducciones") Integer reproducciones,
+                @RequestParam(required=true, name ="estado") EstadoCancion estado){
+
+            // Convertir la fecha string a LocalDate
+            LocalDateTime fecha = LocalDateTime.parse(fechaSalida);
+
+            Canciones cancion = new Canciones(nombreCancion,fecha,duracion,reproducciones,estado);
+
+            Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(idArtista));
+            Artista artista = artistaById.orElse(new Artista());
+
+            artista.addCancion(cancion);
+            artistaRepo.save(artista);
+
+            return "redirect:/artistas/menuCanciones";
+        }
 
 }

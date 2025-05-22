@@ -18,15 +18,21 @@ public class Disquera {
     private Integer id;
 
     @NotBlank(message= "Name is required")
-    @Size (min= 10, max=80, message ="Name must be between 10 and 80 characters")
+    @Size (min= 7, max=80, message ="Name must be between 7 and 80 characters")
     @Column("nombreDisquera")
     private String nombreDisquera;
 
+    @NotBlank(message= "Country is required")
+    @Size (min= 2, max=80, message ="Country must be between 2 and 80 characters")
     private String pais;
 
+    @NotBlank(message= "Number Artist is required")
     @Column("numeroArtistas")
     private Integer numeroArtistas;
+
+    @NotBlank(message= "Date is required")
     private LocalDate fundacion;
+
     private TipoContrato contrato;
 
     public  Disquera() {}
