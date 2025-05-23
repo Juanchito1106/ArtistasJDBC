@@ -3,6 +3,7 @@ package com.juancho.artistas.controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 import com.juancho.artistas.enums.EstadoCancion;
 import com.juancho.artistas.model.Artista;
@@ -88,7 +89,8 @@ public class ArtistaController {
         @GetMapping("/agregarCancion/{id}")
         public String agregarCancion(Model model,  @PathVariable Integer id) {
             model.addAttribute("idArtista", id);
-            return "menuCanciones"; // nombre del HTML
+            model.addAttribute("cancion", new Canciones());
+            return "agregarCancion"; // nombre del HTML
         }
 
 
@@ -101,10 +103,17 @@ public class ArtistaController {
                 @RequestParam(required=true, name ="reproducciones") Integer reproducciones,
                 @RequestParam(required=true, name ="estado") EstadoCancion estado){
 
-            // Convertir la fecha string a LocalDate
-            LocalDateTime fecha = LocalDateTime.parse(fechaSalida);
+            String[] partes = fechaSalida.split("-");
 
-            Canciones cancion = new Canciones(nombreCancion,fecha,duracion,reproducciones,estado);
+            LocalDate fecha = LocalDate.of(Integer.valueOf(partes[0]),
+                    Integer.valueOf(partes[1]),
+                    Integer.valueOf(partes[2]));
+
+
+//            implementé este metodo para evitar error de fecha
+            LocalDateTime fechaCompleta = fecha.atStartOfDay();
+
+            Canciones cancion = new Canciones(nombreCancion,fechaCompleta,duracion,reproducciones,estado);
 
             Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(idArtista));
             Artista artista = artistaById.orElse(new Artista());
@@ -114,5 +123,18 @@ public class ArtistaController {
 
             return "redirect:/artistas/menuCanciones";
         }
+
+    @GetMapping("/verCanciones/{id}")
+    public String verCanciones(Model model, @PathVariable String id) {
+
+        Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(id));
+        Artista artista = artistaById.orElse(new Artista());
+
+        Set<Canciones> comentarios = artista.getCanciones();
+
+        model.addAttribute("canciones", canciones);
+        return "comentarios";
+    }
+
 
 }

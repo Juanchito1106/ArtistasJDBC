@@ -7,9 +7,9 @@
 </head>
 <body>
 <h1>Agregar Cancion</h1>
-<form method="post" action="/anuncios/agregarCancion">
-    <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
+<form method="post" action="/artistas/agregarCancion" th:object="${cancion}">
 
+    <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
 
     <label>Nombre Cancion:</label>
     <input name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" ><br/><br/>
@@ -36,6 +36,7 @@
     <button id="crear-cancion" name="crear-cancion" type="submit">Crear Canción</button>
 
 </form>
+
 <br/>
 <form method="get" action="/artistas/menuCanciones">
     <button>Volver Artistas</button>

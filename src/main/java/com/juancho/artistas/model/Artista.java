@@ -39,6 +39,7 @@ public class Artista {
 
     private GeneroMusical genero;
 
+    // one to one
     @Column("disqueraid")
     private AggregateReference<Disquera,Integer> disqueraid;
 
@@ -50,18 +51,16 @@ public class Artista {
         this.disqueraid = disqueraid;
     }
 
-
-    // one to one
-    private AggregateReference<Artista,Integer> artistaid;
-
-    // one to many
-    // le llega el muchos
+    //one to many
+    //le llega el muchos
     private Set<Canciones> canciones = new HashSet<>();
 
     //Uno a muchos
     // le llega el one
     @Transient //Se guarda como referencia, los datos  del artista con su id
     Artista artista;
+
+
     public Set<Canciones> getCanciones() {
         return canciones;
     }
@@ -73,14 +72,6 @@ public class Artista {
     public void addCancion(Canciones cancion) {
         canciones.add(cancion);
         cancion.artista = this;
-    }
-
-    public AggregateReference<Artista, Integer> getArtista() {
-        return artistaid;
-    }
-
-    public void setArtista(AggregateReference<Artista, Integer> artistaid) {
-        this.artistaid = artistaid;
     }
 
 

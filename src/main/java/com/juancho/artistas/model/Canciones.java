@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 import com.juancho.artistas.enums.EstadoCancion;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-
+@Table("canciones")
 public class Canciones {
 
     @Id
@@ -21,11 +23,21 @@ public class Canciones {
     private Integer reproducciones;
     private EstadoCancion estado;
 
-    private Integer artistaid;
+//    @Column("artistaid")
+//    private AggregateReference<Artista,Integer> artistaid;
 
     //Uno a muchos
+    // le llega el one
     @Transient //Se guarda como referencia, los datos  del artista con su id
     Artista artista;
+
+//    public AggregateReference<Artista, Integer> getArtista() {
+//        return artistaid;
+//    }
+//
+//    public void setArtista(AggregateReference<Artista, Integer> artistaid) {
+//        this.artistaid = artistaid;
+//    }
 
 
     public Canciones() {
@@ -43,15 +55,6 @@ public class Canciones {
         this.reproducciones = reproducciones;
         this.estado = estado;
     }
-
-    public void setArtistaid(Integer artistaid) {
-        this.artistaid = artistaid;
-    }
-
-    public Integer getArtistaid() {
-        return artistaid;
-    }
-
 
     public String getNombreCancion() {
         return nombreCancion;
