@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Cancion</title>
+    <link th:href="@{/css/styleArtist.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Agregar Cancion</h1>
+<form method="post" action="/anuncios/agregarCancion">
+    <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
+
+
+    <label>Nombre Cancion:</label>
+    <input name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" ><br/><br/>
+
+
+    <label>Fecha de salida: </label>
+    <input name="fechaSalida" type="date"  th:field="*{fechaSalida}" ><br/><br/>
+
+    <label>Duración de la canción: </label>
+    <input name="duracion" type="number" placeholder="Duración de la canción" th:field="*{duracion}" ><br/><br/>
+
+    <label>Reproducciones: </label>
+    <input name="reproducciones" type="number" placeholder="Reproducciones de la canción" th:field="*{reproducciones}" ><br/><br/>
+
+    <label>Estado de la canción: </label>
+    <select name="Estado Canción" th:field="*{estado}">
+        <option value="EN_PRODUCCION">EN_PRODUCCION</option>
+        <option value="PUBLICADA">PUBLICADA</option>
+        <option value="INEDITA">INEDITA</option>
+        <option value="DEMO">DEMO</option>
+        <option value="SUSPENDIDA">SUSPENDIDA</option>
+    </select><br/><br/>
+
+    <button id="crear-cancion" name="crear-cancion" type="submit">Crear Canción</button>
+
+</form>
+<br/>
+<form method="get" action="/artistas/menuCanciones">
+    <button>Volver Artistas</button>
+</form>
+</body>
+</html>

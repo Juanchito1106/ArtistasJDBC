@@ -21,6 +21,8 @@ public class Canciones {
     private Integer reproducciones;
     private EstadoCancion estado;
 
+    private Integer artistaid;
+
     //Uno a muchos
     @Transient //Se guarda como referencia, los datos  del artista con su id
     Artista artista;
@@ -40,6 +42,14 @@ public class Canciones {
         this.duracion = duracion;
         this.reproducciones = reproducciones;
         this.estado = estado;
+    }
+
+    public void setArtistaid(Integer artistaid) {
+        this.artistaid = artistaid;
+    }
+
+    public Integer getArtistaid() {
+        return artistaid;
     }
 
 
