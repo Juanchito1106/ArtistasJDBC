@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar canción</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
 </head>
 <body>
 <h1>Menu Canciones</h1>
@@ -18,14 +18,14 @@
         <tr>
             <td th:text="${a.id}"></td>
             <td th:text="${a.nombreArtistico}"></td>
-            <td><button><a th:href="@{|/artistas/agregarCancion/${a.id}|}">Agregar canción</a></button></td>
-            <td><button><a th:href="@{|/artistas/verCancion/${a.id}|}">Ver canciones</a></button></td>
+            <td><button type="submit" ><a th:href="@{|/artistas/agregarCancion/${a.id}|}">Agregar canción</a></button></td>
+            <td><button type="submit" ><a th:href="@{|/artistas/verCanciones/${a.id}|}">Ver canciones</a></button></td>
         </tr>
     </th:block>
 </table>
 <br>
 <form method="get" action="/artistas/listarArtistas">
-    <button>Volver</button>
+    <button id="btn-volver">Volver</button>
 </form></td>
 
 </body>

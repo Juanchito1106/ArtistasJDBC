@@ -71,3 +71,26 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+#btn-volver{
+
+    width: 10%;
+    background-color: #1e4705;
+    border-radius: 24px;
+    border-color: white;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+
+#btn-volver:hover{
+
+    background-color: #1e4705;
+    cursor: pointer;
+    color: #000000;
+    transform: scale(1.1);
+
+}

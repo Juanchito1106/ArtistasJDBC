@@ -6,10 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.juancho.artistas.enums.EstadoCancion;
-import com.juancho.artistas.model.Artista;
-import com.juancho.artistas.model.Canciones;
-import com.juancho.artistas.model.Disquera;
-import com.juancho.artistas.model.RegistroDTO;
+import com.juancho.artistas.enums.PlataformaFavorita;
+import com.juancho.artistas.model.*;
 import com.juancho.artistas.repositories.ArtistasRepositorio;
 import com.juancho.artistas.repositories.DisqueraRepositorio;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -130,10 +128,47 @@ public class ArtistaController {
         Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(id));
         Artista artista = artistaById.orElse(new Artista());
 
-        Set<Canciones> comentarios = artista.getCanciones();
+        Set<Canciones> canciones = artista.getCanciones();
 
         model.addAttribute("canciones", canciones);
-        return "comentarios";
+        return "verCanciones";
+    }
+
+    @GetMapping("/ingresarFanatico")
+    public String ingresarFanaticos() {
+        return "ingresarFanatico";
+    }
+
+    @PostMapping("/agregarFanatico")
+    public String agregarFanatico(Model model,
+                                 @RequestParam(required=true, name ="nombreFanatico") String nombreFanatico,
+                                 @RequestParam(required=true, name ="paisOrigen") String paisOrigen,
+                                 @RequestParam(required=true, name ="edad") Integer edad,
+                                 @RequestParam(required=true, name ="fechaRegistro") String fechaRegistro,
+                                 @RequestParam(required=true, name ="plataforma") PlataformaFavorita plataforma) {
+
+        String[] partes = fechaRegistro.split("-");
+
+        LocalDate fecha = LocalDate.of(Integer.valueOf(partes[0]),
+                Integer.valueOf(partes[1]),
+                Integer.valueOf(partes[2]));
+
+        //implementé este metodo para evitar error de fecha
+        LocalDateTime fechaCompleta = fecha.atStartOfDay();
+
+        Fanaticos fanatico = new Fanaticos();
+        fanatico.setNombreFanatico(nombreFanatico);
+        fanatico.setPaisOrigen(paisOrigen);
+        fanatico.setEdad(edad);
+        fanatico.setFechaRegistro(fechaCompleta);
+        fanatico.setPlataforma(plataforma);
+
+        eventos.save(evento);
+
+        model.addAttribute("eventos", eventos.findAll());
+
+        return "agregarFanatico";
+
     }
 
 

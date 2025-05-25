@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver Canciones</title>
+  <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Canciones</h1>
+<table>
+  <tr>
+    <th>Nombre de la canción</th>
+    <th>Fecha De Salida</th>
+    <th>Duracion</th>
+    <th>Reproducciones</th>
+    <th>Estado</th>
+
+  </tr>
+  <th:block th:each="c : ${canciones}">
+    <tr>
+      <td th:text="${c.nombreCancion}"></td>
+      <td th:text="${c.fechaSalida}" ></td>
+      <td th:text="${c.duracion}"></td>
+      <td th:text="${c.reproducciones}"></td>
+      <td th:text="${c.estado}"></td>
+    </tr>
+  </th:block>
+
+</table>
+<br/>
+<form method="get" action="/artistas/menuCanciones">
+  <button id="btn-volver">Volver Canciones</button>
+</form>
+</body>
+</html>
