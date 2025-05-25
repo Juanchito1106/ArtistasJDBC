@@ -23,21 +23,10 @@ public class Canciones {
     private Integer reproducciones;
     private EstadoCancion estado;
 
-//    @Column("artistaid")
-//    private AggregateReference<Artista,Integer> artistaid;
-
     //Uno a muchos
     // le llega el one
     @Transient //Se guarda como referencia, los datos  del artista con su id
     Artista artista;
-
-//    public AggregateReference<Artista, Integer> getArtista() {
-//        return artistaid;
-//    }
-//
-//    public void setArtista(AggregateReference<Artista, Integer> artistaid) {
-//        this.artistaid = artistaid;
-//    }
 
 
     public Canciones() {

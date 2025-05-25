@@ -4,22 +4,37 @@ import java.time.LocalDateTime;
 
 import com.juancho.artistas.enums.PlataformaFavorita;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-
+@Table("fanaticos")
 public class Fanaticos {
 
 
     @Id
     private Integer id;
+
+    @Column("nombreFanatico")
     private String nombreFanatico;
+
+    @Column("paisOrigen")
     private String paisOrigen;
+
     private Integer edad;
+
+    @Column("fechaRegistro")
     private LocalDateTime fechaRegistro;
+
     private PlataformaFavorita plataforma;
 
+    //Uno a muchos
+    // le llega el one
+    @Transient //Se guarda como referencia, los datos  del artista con su id
+    Disquera disquera;
 
     public Fanaticos() {
-        super();
+
     }
 
 

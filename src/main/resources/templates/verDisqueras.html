@@ -24,7 +24,11 @@
       <td th:text="${d.numeroArtistas}"></td>
       <td th:text="${d.fundacion}"></td>
       <td th:text="${d.contrato}"></td>
-      <td><button><a th:href="@{|/anuncios/eventosautor/${d.id}|}">Fanaticos</a></button></td>
+      <td>
+        <form method="get" action="/artistas/menuFanaticos">
+          <button>Fanaticos</button>
+        </form>
+      </td>
     </tr>
   </th:block>
 

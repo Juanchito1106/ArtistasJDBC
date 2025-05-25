@@ -26,7 +26,6 @@ public class ArtistaController {
     public ArtistaController(ArtistasRepositorio artistaRepo, DisqueraRepositorio disqueraRepo) {
         this.artistaRepo = artistaRepo;
         this.disqueraRepo = disqueraRepo;
-
     }
 
     @GetMapping
@@ -134,18 +133,31 @@ public class ArtistaController {
         return "verCanciones";
     }
 
-    @GetMapping("/ingresarFanatico")
-    public String ingresarFanaticos() {
-        return "ingresarFanatico";
+
+    //    Para ir al menu de los fanaticos
+    @GetMapping("/menuFanaticos")
+    public String menuFanaticos(Model model) {
+        model.addAttribute("disquera", disqueraRepo.findAll());
+        return "menuFanaticos"; // nombre del HTML
     }
+
+    //    Para agregar un nuevo Fanatico según el id de la DISQUERA
+    @GetMapping("/agregarFanatico/{id}")
+    public String agregarFanatico(Model model,  @PathVariable Integer id) {
+        model.addAttribute("idDisquera", id);
+        model.addAttribute("fanatico", new Fanaticos());
+        return "agregarFanatico"; // nombre del HTML
+    }
+
 
     @PostMapping("/agregarFanatico")
     public String agregarFanatico(Model model,
-                                 @RequestParam(required=true, name ="nombreFanatico") String nombreFanatico,
-                                 @RequestParam(required=true, name ="paisOrigen") String paisOrigen,
-                                 @RequestParam(required=true, name ="edad") Integer edad,
-                                 @RequestParam(required=true, name ="fechaRegistro") String fechaRegistro,
-                                 @RequestParam(required=true, name ="plataforma") PlataformaFavorita plataforma) {
+                          @RequestParam(required=true, name ="idDisquera") Integer idDisquera,
+                          @RequestParam(required=true, name ="nombreFanatico") String nombreFanatico,
+                          @RequestParam(required=true, name ="paisOrigen") String paisOrigen,
+                          @RequestParam(required=true, name ="edad") Integer edad,
+                          @RequestParam(required=true, name ="fechaRegistro") String fechaRegistro,
+                          @RequestParam(required=true, name ="plataforma") PlataformaFavorita plataforma) {
 
         String[] partes = fechaRegistro.split("-");
 
@@ -156,20 +168,26 @@ public class ArtistaController {
         //implementé este metodo para evitar error de fecha
         LocalDateTime fechaCompleta = fecha.atStartOfDay();
 
-        Fanaticos fanatico = new Fanaticos();
-        fanatico.setNombreFanatico(nombreFanatico);
-        fanatico.setPaisOrigen(paisOrigen);
-        fanatico.setEdad(edad);
-        fanatico.setFechaRegistro(fechaCompleta);
-        fanatico.setPlataforma(plataforma);
+        Fanaticos fanatico = new Fanaticos(nombreFanatico,paisOrigen,edad,fechaCompleta,plataforma);
 
-        eventos.save(evento);
+        Optional<Disquera> disqueraById = disqueraRepo.findById(Integer.valueOf(idDisquera));
+        Disquera disquera = disqueraById.orElse(new Disquera());
 
-        model.addAttribute("eventos", eventos.findAll());
+        disquera.addFanatico(fanatico);
+        disqueraRepo.save(disquera);
 
-        return "agregarFanatico";
-
+        return "redirect:/artistas/menuFanaticos";
     }
 
+    @GetMapping("/verFanaticos/{id}")
+    public String verFanaticos(Model model, @PathVariable String id) {
 
+        Optional<Disquera> disqueraById = disqueraRepo.findById(Integer.valueOf(id));
+        Disquera disquera = disqueraById.orElse(new Disquera());
+
+        Set<Fanaticos> fanaticos = disquera.getFanaticos();
+
+        model.addAttribute("fanaticos", fanaticos);
+        return "verFanaticos";
+    }
 }

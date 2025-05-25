@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Fanatico</title>
+  <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
+</head>
+<body>
+<h1>Menu Fanaticos</h1>
+<table>
+  <tr>
+    <th>Id Disquera</th>
+    <th>Nombre de la disquera</th>
+    <th>Agregar Fanatico</th>
+    <th>Ver Fanaticos</th>
+  </tr>
+  <th:block th:each="d : ${disquera}">
+    <tr>
+      <td th:text="${d.id}"></td>
+      <td th:text="${d.nombreDisquera}"></td>
+      <td><button type="submit" ><a th:href="@{|/artistas/agregarFanatico/${d.id}|}">Agregar Fanatico</a></button></td>
+      <td><button type="submit" ><a th:href="@{|/artistas/verFanaticos/${d.id}|}">Ver Fanaticos</a></button></td>
+    </tr>
+  </th:block>
+</table>
+<br>
+<form method="get" action="/artistas/verDisquera/1">
+  <button id="btn-volver">Volver</button>
+</form></td>
+
+</body>
+</html>

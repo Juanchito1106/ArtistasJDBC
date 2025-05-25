@@ -2,11 +2,14 @@ package com.juancho.artistas.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.juancho.artistas.enums.TipoContrato;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -34,6 +37,28 @@ public class Disquera {
     private LocalDate fundacion;
 
     private TipoContrato contrato;
+
+    //one to many
+    //le llega el muchos
+    private Set<Fanaticos> fanaticos = new HashSet<>();
+
+    //Uno a muchos
+    // le llega el one
+    @Transient //Se guarda como referencia, los datos  de la disquera con su id
+    Disquera disquera;
+
+    public Set<Fanaticos> getFanaticos() {
+        return fanaticos;
+    }
+
+    public void setFanaticos(Set<Fanaticos> fanaticos) {
+        this.fanaticos = fanaticos;
+    }
+
+    public void addFanatico(Fanaticos fanatico) {
+        fanaticos.add(fanatico);
+        fanatico.disquera = this;
+    }
 
     public  Disquera() {}
 

@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Agregar Fanatico</title>
+    <link th:href="@{/css/styleArtist.css}" rel="stylesheet" />
 </head>
 <body>
+<h1>Agregar fanatico</h1>
+<form method="post" action="/artistas/agregarFanatico" th:object="${fanatico}">
 
+    <input type="hidden" th:attr="name='idDisquera'" th:value="${idDisquera}" />
+
+    <label>Nombre del Fanatico:</label>
+    <input name="name" type="text" placeholder="Nombre del Fanatico" th:field="*{nombreFanatico}" ><br/><br/>
+
+    <label>Pais de Origen:</label>
+    <input name="paisOrigen" type="text" placeholder="Pais del Fanatico" th:field="*{paisOrigen}" ><br/><br/>
+
+    <label>Edad: </label>
+    <input name="edad" type="number" placeholder="Edad del fanatico" th:field="*{edad}" ><br/><br/>
+
+    <label>Fecha de salida: </label>
+    <input name="fechaSalida" type="date"  th:field="*{fechaRegistro}" ><br/><br/>
+
+    <label>Plataforma favorita: </label>
+    <select name="Plataforma favorita" th:field="*{plataforma}">
+        <option value="SPOTIFY">SPOTIFY</option>
+        <option value="YOUTUBE">YOUTUBE</option>
+        <option value="APPLE_MUSIC">APPLE_MUSIC</option>
+        <option value="DEEZER">DEEZER</option>
+        <option value="AMAZON_MUSIC">AMAZON_MUSIC</option>
+    </select><br/><br/>
+
+    <button id="crear-fanatico" name="crear-fanatico" type="submit">Crear fanatico</button>
+
+</form>
+
+<br/>
+<form method="get" action="/artistas/menuFanaticos">
+    <button>Volver Disqueras</button>
+</form>
 </body>
 </html>
