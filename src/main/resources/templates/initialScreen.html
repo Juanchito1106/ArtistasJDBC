@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantalla inicial Artist Project</title>
+  <link href="/css/initialScreen.css" rel="stylesheet" />
+
+</head>
+<body>
+
+<!-- Codigo para los dos titulos (music project y by juanchito) -->
+<div class="titulos-principal">
+  <h1 id="titulo">MUSIC PROJECT</h1>
+  <div id="by-juancho">
+    <img id="headphones" src="/Images/headphones.png" alt="headphones">
+    <h2 id="creador">By Juanchito</h2>
+  </div>
+</div>
+
+
+<div class="botones-up"> <!-- Div para separar los botones de arriba -->
+  <div class="boton-con-label"> <!-- Div para juntar label y botón artistas -->
+    <form method="get" action="/artistas">
+      <button id="artist-button"></button>
+    </form>
+    <label for="artist-button">Artistas</label>
+  </div>
+
+  <div class="boton-con-label"> <!-- Div para juntar label y botón disquera -->
+    <form method="get" action="/artistas/verDisquera/1">
+      <button id="disquera-button"></button>
+    </form>
+    <label for="disquera-button">Disquera</label>
+  </div>
+</div>
+
+<div class="botones-down"><!-- Div para separar los botones de abajo -->
+  <div class="boton-con-label"><!-- Div para juntar label y botón canciones -->
+    <button id="cancion-button"></button>
+    <label for="cancion-button">Canciones</label>
+
+  </div>
+
+  <div class="boton-con-label"><!-- Div para juntar label y botón fanaticos -->
+    <button id="fan-button"></button>
+    <label for="fan-button">Fanaticos</label>
+  </div>
+</div>
+
+<!-- parte final linea y texto de abajo para terminar interfaz -->
+<div class="linea-naranja"></div> <!-- Línea decorativa -->
+<p class="texto-inferior"><!-- Texto debajo -->
+  Hola tu!!, soy Juan Andres Correa Sanchez, actualmente soy un <br>
+  estudiante universitario que espera en un futuro poder plasmar sus <br>
+  ideas creativas en el mundo del desarrollo web de aplicaciones, este <br>
+  es un proyecto básico que hice con Spring Boot, espero te guste.
+</p>
+
+
+
+</body>
+</html>

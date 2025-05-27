@@ -1,0 +1,177 @@
+body{
+
+    background-image: url('/Images/Fondo_Home_Music_project.png');
+    background-size: cover;         /* Ajusta la imagen al tamaño de la pantalla */
+    background-repeat: no-repeat;   /* No repite la imagen */
+    color: white;
+}
+
+/* Todo el tema del los titulos principales */
+#titulo{
+
+
+    font-size: 500%;
+
+}
+
+#creador{
+
+    font-size: 200%;
+
+}
+
+#headphones{
+
+    width: 50px;
+    height: auto;
+
+}
+
+
+#by-juancho{
+
+    position: absolute;
+    bottom: 80px;
+    display: flex;
+    align-items: center;  /* Centra verticalmente la imagen y el texto */
+    gap: 10px;            /* Espacio entre la imagen y el h2 */
+    position: relative;   /* Ya no necesitas absolute/margin-left excesivo */
+    margin: 20px;         /* Puedes ajustar según quieras posicionarlo */
+}
+
+.titulos-principal{
+
+    position: absolute;
+    left: 1070px;
+}
+
+
+
+/* Empezamos con la configuración de los botones */
+
+.botones-up{
+
+    display: flex;
+    gap: 200px; /* Espacio horizontal entre botones */
+    position: absolute;
+    left: 1200px;
+    top: 220px;
+
+}
+
+.botones-down{
+
+    display: flex;
+    gap: 200px; /* Espacio horizontal entre botones */
+    position: absolute;
+    left: 1200px;
+    top: 450px;
+
+}
+
+.boton-con-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-size: 35px;
+    width: 150px; /* Fuerza igual ancho */
+    transition: all 0.3s ease-in-out;
+
+}
+
+/* configuración general de los botones */
+button{
+
+    height: 100px;
+    width: 100px;
+    background-color: #000000;
+    border-radius: 10px;
+    border-color: white;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+}
+
+label{
+
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+
+button:hover,
+label:hover,
+.boton-con-label:hover{
+
+    cursor: pointer;
+    transform: scale(1.1);
+
+}
+
+/* Configuración botón artista */
+#artist-button{
+
+    background-image: url("/Images/cantando.png"); /* Ruta a tu imagen */
+    background-size: cover; /* Ajusta la imagen al botón */
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+/* Configuración botón disquera */
+#disquera-button{
+
+    background-image: url("/Images/reproductor-de-vinilo.png"); /* Ruta a tu imagen */
+    background-size: cover; /* Ajusta la imagen al botón */
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+/* Configuración botón canciones */
+#cancion-button{
+
+    background-image: url("/Images/music.png"); /* Ruta a tu imagen */
+    background-size: cover; /* Ajusta la imagen al botón */
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+
+
+/* Configuración botón fanaticos */
+#fan-button{
+
+    background-image: url("/Images/engagement.png"); /* Ruta a tu imagen */
+    background-size: cover; /* Ajusta la imagen al botón */
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+
+.linea-naranja {
+    width: 715px;
+    height: 4px;
+    background-color: #ee9851;
+    margin-top: 5px;
+    border-radius: 2px;
+    position: absolute;
+    left: 1160px;
+    bottom: 360px;
+}
+
+.texto-inferior {
+
+    font-size: 18px;
+    color: white;
+    text-align: justify; /* Esto alinea ambos lados */
+    position: absolute;
+    left: 1160px;
+    bottom: 250px;
+}

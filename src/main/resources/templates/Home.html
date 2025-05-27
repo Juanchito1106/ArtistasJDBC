@@ -5,7 +5,7 @@
     <title>Ingresar nuevo artista</title>
 
 <!--    <link href="/static/css/styleArtist.css" rel="stylesheet" />-->
-    <link th:href="@{/css/styleArtist.css}" rel="stylesheet" />
+    <link th:href="@{/css/styleArtistDisqueraForm.css}" rel="stylesheet" />
 
 
 </head>
@@ -13,70 +13,104 @@
 
 <form th:action="@{/artistas/ingresar}" method="post" th:object="${dto}" class="mt-4">
 
+    <div id="music-project">
+        <img id="headphones" src="/Images/headphones.png" alt="headphones">
+        <h2 id="creador">Music Project</h2>
+    </div>
+
+
+
     <!-- Artista -->
-    <h1>Ingrese un nuevo artista</h1>
+    <h2 id="artista-tittle">Ingrese un nuevo artista</h2>
 
-    <h2>Datos del artista</h2>
+    <div class="div-artista">
 
-    <label>Nombre Artístico:</label>
-    <input name="name" type="text" placeholder="Nombre del artista" th:field="*{nombreArtistico}" ><br/><br/>
+        <div class="artist-input-label">
+            <label>Nombre Artístico:</label>
+            <input name="name" type="text" placeholder="Nombre del artista" th:field="*{nombreArtistico}" ><br/><br/>
+        </div>
 
-    <label>Edad del artista: </label>
-    <input name="edad" type="number" placeholder="Edad del artista" th:field="*{edad}" ><br/><br/>
+        <div class="artist-input-label">
+            <label>Edad del artista: </label>
+            <input name="edad" type="number" placeholder="Edad del artista" th:field="*{edad}" ><br/><br/>
+        </div>
 
-    <label>Fecha de nacimiento: </label>
-    <input name="fechaNacimiento" type="date"  th:field="*{fechaNacimiento}" ><br/><br/>
+        <div class="artist-input-label">
+            <label>Fecha de nacimiento: </label>
+            <input name="fechaNacimiento" type="date"  th:field="*{fechaNacimiento}" ><br/><br/>
+        </div>
+
+        <div class="artist-input-label">
+            <label>Nacionalidad:</label>
+            <input name="nacionalidad" type="text" placeholder="Nacionalidad del artista" th:field="*{nacionalidad}" ><br/><br/>
+        </div>
+
+        <div class="artist-input-label">
+            <label>Genero Musical del Artista: </label>
+            <select name="Genero Musical" th:field="*{genero}">
+                <option value="POP">POP</option>
+                <option value="ROCK">ROCK</option>
+                <option value="RAP">RAP</option>
+                <option value="REGGAETON">REGGAETON</option>
+                <option value="ELECTRONICA">ELECTRONICA</option>
+                <option value="SALSA">SALSA</option>
+                <option value="HIPHOP">HIPHOP</option>
+            </select><br/><br/>
+        </div>
+
+    </div>
 
 
-    <label>Nacionalidad:</label>
-    <input name="nacionalidad" type="text" placeholder="Nacionalidad del artista" th:field="*{nacionalidad}" ><br/><br/>
-
-    <label>Genero Musical del Artista: </label>
-    <select name="Genero Musical" th:field="*{genero}">
-        <option value="POP">POP</option>
-        <option value="ROCK">ROCK</option>
-        <option value="RAP">RAP</option>
-        <option value="REGGAETON">REGGAETON</option>
-        <option value="ELECTRONICA">ELECTRONICA</option>
-        <option value="SALSA">SALSA</option>
-        <option value="HIPHOP">HIPHOP</option>
-    </select><br/><br/>
+    <img id="music-contract" src="/Images/music_contract.png" alt="music-contract">
 
 
     <!--  DISQUERA -->
+    <!-- div para separar todo lo de disquera -->
+    <h2 id="disquera-tittle">Ingrese una nueva disquera</h2>
 
-    <h1>Ingrese una nueva disquera</h1>
+    <div class="div-disquera">
+        <div class="input-con-label">
+            <label>Nombre de la Disquera:</label>
+            <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}" ><br/><br/>
+        </div>
 
-    <h2>Datos de la Disquera</h2>
+        <div class="input-con-label">
+            <label>País: </label>
+            <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
+        </div>
 
-    <label>Nombre de la Disquera:</label>
-    <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}" ><br/><br/>
+        <div class="input-con-label">
+            <label>Número de artistas: </label>
+            <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}" ><br/><br/>
+        </div>
 
-    <label>País: </label>
-    <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
+        <div class="input-con-label">
+            <label>Fundación:</label>
+            <input name="fundacion" type="date"  th:field="*{fundacion}" ><br/><br/>
+        </div>
 
-    <label>Número de artistas: </label>
-    <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}" ><br/><br/>
+        <div class="input-con-label">
+            <label>Tipo de Contrato:</label>
+            <select name="Tipo de Contrato" th:field="*{contrato}">
+                <option value="EXCLUSIVO">EXCLUSIVO</option>
+                <option value="DISTRIBUCION">ROCK</option>
+                <option value="LICENCIA">LICENCIA</option>
+                <option value="CONTRATO_360">CONTRATO_360</option>
+            </select><br/><br/>
+        </div>
+    </div>
 
-
-    <label>Fundación:</label>
-    <input name="fundacion" type="date"  th:field="*{fundacion}" ><br/><br/>
-
-    <label>Tipo de Contrato:</label>
-    <select name="Tipo de Contrato" th:field="*{contrato}">
-        <option value="EXCLUSIVO">EXCLUSIVO</option>
-        <option value="DISTRIBUCION">ROCK</option>
-        <option value="LICENCIA">LICENCIA</option>
-        <option value="CONTRATO_360">CONTRATO_360</option>
-    </select><br/><br/>
-
-
-    <div class="botones">
+    <div class="boton-registro">
         <button id="registro" name="registrar" type="submit">Registrar</button>
+    </div>
+
+    <div class="boton-ver-artistas">
         <a href="/artistas/listarArtistas" id="btn-artista">Ver Artistas</a>
     </div>
 
+
 </form>
+
 
 
 </body>
