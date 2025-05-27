@@ -268,14 +268,96 @@ label:hover,
 }
 
 
+
+
 @media screen and (max-width:1080px ) {
 
     body{
 
         background-image: url('/Images/Fondo_Home_Music_project.png');
-        background-size: cover;         /* Ajusta la imagen al tamaño de la pantalla */
+        background-size: 100%;         /* Ajusta la imagen al tamaño de la pantalla */
         background-repeat: no-repeat;   /* No repite la imagen */
         color: white;
+    }
+
+    #by-juancho{
+        position: absolute;
+        bottom: 45px;
+        display: flex;
+        align-items: center;  /* Centra verticalmente la imagen y el texto */
+        gap: 20px;            /* Espacio entre la imagen y el h2 */
+        position: relative;   /* Ya no necesitas absolute/margin-left excesivo */
+        margin: 20px;         /* Puedes ajustar según quieras posicionarlo */
+    }
+
+
+    #titulo{
+        font-size: 280%;
+    }
+
+    #creador{
+        font-size: 130%;
+    }
+
+    #headphones{
+        width: 35px;
+        height: auto;
+    }
+
+    .titulos-principal{
+        position: absolute;
+        left: 54%;
+    }
+
+    .botones-up{
+
+        display: flex;
+        gap: 17%; /* Espacio horizontal entre botones */
+        position: absolute;
+        left: 59%;
+        top: 22%;
+    }
+
+    .botones-down{
+
+        display: flex;
+        gap: 11%; /* Espacio horizontal entre botones */
+        position: absolute;
+        left: 58%;
+        top: 45%;
+    }
+
+    /* configuración general de los botones */
+    button{
+        height: 65px;
+        width: 65px;
+        background-color: #000000;
+        border-radius: 10px;
+        border-color: white;
+        color: rgb(255, 255, 255);
+        font-size: 20px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+    }
+
+    .linea-naranja {
+        width: 715px;
+        height: 4px;
+        background-color: #ee9851;
+        margin-top: 5px;
+        border-radius: 2px;
+        position: absolute;
+        left: 57%;
+        bottom: 36%;
+    }
+
+    .texto-inferior {
+        font-size: 12px;
+        color: white;
+        text-align: justify; /* Esto alinea ambos lados */
+        position: absolute;
+        left: 58%;
+        bottom: 24%;
     }
 
 
