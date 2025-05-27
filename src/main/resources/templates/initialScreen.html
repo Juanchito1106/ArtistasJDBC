@@ -37,13 +37,16 @@
 
 <div class="botones-down"><!-- Div para separar los botones de abajo -->
   <div class="boton-con-label"><!-- Div para juntar label y botón canciones -->
-    <button id="cancion-button"></button>
+    <form method="get" action="artistas/menuCanciones">
+      <button id="cancion-button"></button>
+    </form>
     <label for="cancion-button">Canciones</label>
-
   </div>
 
   <div class="boton-con-label"><!-- Div para juntar label y botón fanaticos -->
-    <button id="fan-button"></button>
+    <form method="get" action="artistas/menuFanaticos">
+      <button id="fan-button"></button>
+    </form>
     <label for="fan-button">Fanaticos</label>
   </div>
 </div>

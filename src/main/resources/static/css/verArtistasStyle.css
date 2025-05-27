@@ -26,9 +26,9 @@ tr:nth-child(even) {
 }
 
 button {
-    background-color: #1e4705;
+    background-color: #bac8d3;
     border-radius: 24px;
-    color: white;
+    color: #666464;
     font-size: 16px;
     font-weight: bold;
     padding: 10px 20px;

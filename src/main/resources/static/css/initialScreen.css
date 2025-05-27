@@ -42,7 +42,7 @@ body{
 .titulos-principal{
 
     position: absolute;
-    left: 1070px;
+    left: 57%;
 }
 
 
@@ -52,20 +52,20 @@ body{
 .botones-up{
 
     display: flex;
-    gap: 200px; /* Espacio horizontal entre botones */
+    gap: 79%; /* Espacio horizontal entre botones */
     position: absolute;
-    left: 1200px;
-    top: 220px;
+    left: 65%;
+    top: 22%;
 
 }
 
 .botones-down{
 
     display: flex;
-    gap: 200px; /* Espacio horizontal entre botones */
+    gap: 72%; /* Espacio horizontal entre botones */
     position: absolute;
-    left: 1200px;
-    top: 450px;
+    left: 64%;
+    top: 45%;
 
 }
 
@@ -162,8 +162,8 @@ label:hover,
     margin-top: 5px;
     border-radius: 2px;
     position: absolute;
-    left: 1160px;
-    bottom: 360px;
+    left: 62%;
+    bottom: 36%;
 }
 
 .texto-inferior {
@@ -172,6 +172,111 @@ label:hover,
     color: white;
     text-align: justify; /* Esto alinea ambos lados */
     position: absolute;
-    left: 1160px;
-    bottom: 250px;
+    left: 62%;
+    bottom: 25%;
+}
+
+/*Configuración del responsive*/
+@media screen and (max-width:1600px ) {
+    body{
+        background-image: url('/Images/Fondo_Home_Music_project.png');
+        background-size: cover;         /* Ajusta la imagen al tamaño de la pantalla */
+        background-repeat: no-repeat;   /* No repite la imagen */
+        color: white;
+    }
+
+    #by-juancho{
+        position: absolute;
+        bottom: 62px;
+        display: flex;
+        align-items: center;  /* Centra verticalmente la imagen y el texto */
+        gap: 10px;            /* Espacio entre la imagen y el h2 */
+        position: relative;   /* Ya no necesitas absolute/margin-left excesivo */
+        margin: 20px;         /* Puedes ajustar según quieras posicionarlo */
+    }
+
+
+    #titulo{
+        font-size: 400%;
+    }
+
+    #creador{
+        font-size: 150%;
+    }
+
+    #headphones{
+        width: 45px;
+        height: auto;
+    }
+
+    .titulos-principal{
+        position: absolute;
+        left: 54%;
+    }
+
+    .botones-up{
+
+        display: flex;
+        gap: 67%; /* Espacio horizontal entre botones */
+        position: absolute;
+        left: 59%;
+        top: 22%;
+    }
+
+    .botones-down{
+
+        display: flex;
+        gap: 60%; /* Espacio horizontal entre botones */
+        position: absolute;
+        left: 58%;
+        top: 45%;
+    }
+
+    /* configuración general de los botones */
+    button{
+        height: 85px;
+        width: 85px;
+        background-color: #000000;
+        border-radius: 10px;
+        border-color: white;
+        color: rgb(255, 255, 255);
+        font-size: 20px;
+        font-weight: bold;
+        transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+    }
+
+    .linea-naranja {
+        width: 715px;
+        height: 4px;
+        background-color: #ee9851;
+        margin-top: 5px;
+        border-radius: 2px;
+        position: absolute;
+        left: 57%;
+        bottom: 36%;
+    }
+
+    .texto-inferior {
+        font-size: 15px;
+        color: white;
+        text-align: justify; /* Esto alinea ambos lados */
+        position: absolute;
+        left: 57%;
+        bottom: 26%;
+    }
+
+}
+
+
+@media screen and (max-width:1080px ) {
+
+    body{
+
+        background-image: url('/Images/Fondo_Home_Music_project.png');
+        background-size: cover;         /* Ajusta la imagen al tamaño de la pantalla */
+        background-repeat: no-repeat;   /* No repite la imagen */
+        color: white;
+    }
+
+
 }
