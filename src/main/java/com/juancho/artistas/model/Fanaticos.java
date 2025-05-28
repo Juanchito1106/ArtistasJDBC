@@ -1,10 +1,13 @@
 package com.juancho.artistas.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.juancho.artistas.enums.PlataformaFavorita;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
+import com.juancho.artistas.model.Disquera;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -28,10 +31,6 @@ public class Fanaticos {
 
     private PlataformaFavorita plataforma;
 
-    //Uno a muchos
-    // le llega el one
-    @Transient //Se guarda como referencia, los datos  del artista con su id
-    Disquera disquera;
 
     public Fanaticos() {
 
@@ -48,6 +47,13 @@ public class Fanaticos {
         this.plataforma = plataforma;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNombreFanatico() {
         return nombreFanatico;
@@ -98,4 +104,30 @@ public class Fanaticos {
         this.plataforma = plataforma;
     }
 
+    //Many to many
+    private Set<DisqueraFanatico> Disqueras = new HashSet<>();
+
+    public Set<DisqueraFanatico> getDisquera() {
+        return Disqueras;
+    }
+
+    public void addDisquera(Disquera disquera) {
+        DisqueraFanatico disqueraFanatico = new DisqueraFanatico();
+        disqueraFanatico.setDisquera(disquera.getId());
+        disqueraFanatico.setNameDisquera(disquera.getNombreDisquera());
+        this.Disqueras.add(disqueraFanatico);
+
+    }
+
+    public Set<Integer> getDisqueraIds(){
+        return this.Disqueras.stream()
+                .map(d->d.getDisquera())
+                .collect(Collectors.toSet());
+    }
+
+    public Set<String> getDisqueraNames(){
+        return this.Disqueras.stream()
+                .map(d->d.getNameDisquera())
+                .collect(Collectors.toSet());
+    }
 }

@@ -13,9 +13,8 @@ Básicamente se hace todo como está normal y se crea la intersección
 4. La linea de HashSet many to many va en Fanaticos
     private Set<DisqueraFanatico> Disquera = new HashSet<>();
 
-5. Luego crear la una interfaz fanaticos y hacerle la logica para hacer la relación
+5. Luego crear la interfaz fanaticos y hacerle la logica para hacer la relación
 muchos a muchos, fanaticos - disquera
-
 
 
 

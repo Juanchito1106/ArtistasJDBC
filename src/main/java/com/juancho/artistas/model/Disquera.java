@@ -38,28 +38,6 @@ public class Disquera {
 
     private TipoContrato contrato;
 
-    //one to many
-    //le llega el muchos
-    private Set<Fanaticos> fanaticos = new HashSet<>();
-
-    //Uno a muchos
-    // le llega el one
-    @Transient //Se guarda como referencia, los datos  de la disquera con su id
-    Disquera disquera;
-
-    public Set<Fanaticos> getFanaticos() {
-        return fanaticos;
-    }
-
-    public void setFanaticos(Set<Fanaticos> fanaticos) {
-        this.fanaticos = fanaticos;
-    }
-
-    public void addFanatico(Fanaticos fanatico) {
-        fanaticos.add(fanatico);
-        fanatico.disquera = this;
-    }
-
     public  Disquera() {}
 
     public Disquera(String nombreDisquera, String pais, Integer numeroArtistas, LocalDate fundacion,

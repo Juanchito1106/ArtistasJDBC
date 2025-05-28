@@ -2,33 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Menu Fanatico</title>
+  <title>Fanaticos de la disquera</title>
   <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Fanaticos</h1>
+<h1>Fanaticos de la Disquera</h1>
 <table>
   <tr>
     <th>Id</th>
     <th>Nombre</th>
+    <th>Pais De Origen</th>
+    <th>Edad</th>
+    <th>Fecha de Registro</th>
     <th>Plataforma Favorita</th>
-    <th>Agregar Disquera</th>
-    <th>Ver Disqueras</th>
   </tr>
   <th:block th:each="f : ${fanaticos}">
     <tr>
       <td th:text="${f.id}"></td>
       <td th:text="${f.nombreFanatico}"></td>
+      <td th:text="${f.paisOrigen}"></td>
+      <td th:text="${f.edad}"></td>
+      <td th:text="${f.fechaRegistro}"></td>
       <td th:text="${f.plataforma}"></td>
-      <td><button type="submit" ><a th:href="@{|/artistas/agregarDisquera/${f.id}|}">Agregar Disquera</a></button></td>
-      <td><button type="submit" ><a th:href="@{|/artistas/verDisqueras/${f.id}|}">Ver Disquera</a></button></td>
     </tr>
   </th:block>
-</table>
-<br>
-<form method="get" action="/artistas">
-  <button id="btn-volver">Volver Artistas</button>
-</form></td>
 
+</table>
+<br/><br/>
+<form method="get" action="/artistas/listarArtistas">
+  <button>Volver</button>
+</form>
 </body>
 </html>

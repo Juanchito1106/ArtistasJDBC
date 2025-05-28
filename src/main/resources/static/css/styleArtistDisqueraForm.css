@@ -28,7 +28,9 @@ body  {
 
 }
 
+
 #main-tittle{
+
     font-size: 70px;
     text-align: center;
     position: absolute;
@@ -36,8 +38,8 @@ body  {
     top: 3%;
 
 }
-
 /* Configuración de estilo de los botones */
+
 #registro{
     width: 12%;
     background-color: #bac8d3;
@@ -58,7 +60,6 @@ body  {
     color: black;
 
 }
-
 
 /* Configuración botón para ver los artistas */
 #btn-artista {
@@ -86,13 +87,6 @@ body  {
     transition: all 0.3s ease-in-out;
 }
 
-#btn-artista:hover{
-
-    cursor: pointer;
-    transform: scale(1.1);
-
-}
-
 .boton-ver-artistas{
 
     display: flex;
@@ -101,6 +95,49 @@ body  {
     top: 5%;
 }
 
+/* Configuración botón para agregar un fanatico */
+#btn-fanatico {
+    display: flex;                        /* Permite alinear contenido interno */
+    justify-content: center;             /* Centra horizontalmente */
+    align-items: center;                 /* Centra verticalmente */
+
+    width: 120px;
+    height: 20px;
+
+    background-color: #000000;
+    border-radius: 10px;
+    border: 2px solid white;
+
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+
+    background-image: url("/Images/concert.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    transition: all 0.3s ease-in-out;
+}
+
+
+.boton-ver-fanaticos
+{
+
+    display: flex;
+    position: absolute;
+    left: 76%;
+    top: 5%;
+}
+
+#btn-artista:hover,
+#btn-fanatico:hover{
+
+    cursor: pointer;
+    transform: scale(1.1);
+
+}
 
 
 /* Configuración de estilo de los input y los select */
@@ -213,6 +250,15 @@ label{
 
 }
 
+#btn-fanatico{
+
+    margin-left: 15px;
+    height: 54px;
+    display: flex;
+    justify-content: center;  /* Para centrar horizontalmente los elementos (el texto) */
+    align-items: center;      /* Y este para centrar verticalmente los elementos */
+
+}
 
 .boton-registro {
     width: 60%;

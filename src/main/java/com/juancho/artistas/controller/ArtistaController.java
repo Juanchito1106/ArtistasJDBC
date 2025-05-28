@@ -10,6 +10,7 @@ import com.juancho.artistas.enums.PlataformaFavorita;
 import com.juancho.artistas.model.*;
 import com.juancho.artistas.repositories.ArtistasRepositorio;
 import com.juancho.artistas.repositories.DisqueraRepositorio;
+import com.juancho.artistas.repositories.FanaticosRepositorio;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +23,12 @@ public class ArtistaController {
 
     private final ArtistasRepositorio artistaRepo;
     private final DisqueraRepositorio disqueraRepo;
+    private final FanaticosRepositorio fanaticosRepo;
 
-    public ArtistaController(ArtistasRepositorio artistaRepo, DisqueraRepositorio disqueraRepo) {
+    public ArtistaController(ArtistasRepositorio artistaRepo, DisqueraRepositorio disqueraRepo, FanaticosRepositorio fanaticosRepo) {
         this.artistaRepo = artistaRepo;
         this.disqueraRepo = disqueraRepo;
+        this.fanaticosRepo = fanaticosRepo;
     }
 
     @GetMapping
@@ -133,26 +136,14 @@ public class ArtistaController {
         return "verCanciones";
     }
 
-
-    //    Para ir al menu de los fanaticos
-    @GetMapping("/menuFanaticos")
-    public String menuFanaticos(Model model) {
-        model.addAttribute("disquera", disqueraRepo.findAll());
-        return "menuFanaticos"; // nombre del HTML
+    //Levar hacia la interfaz para añadir un nuevo fanatico
+    @GetMapping("/agregarFanatico")
+    public String agregarFanaticos() {
+        return "agregarFanatico";
     }
 
-    //    Para agregar un nuevo Fanatico según el id de la DISQUERA
-    @GetMapping("/agregarFanatico/{id}")
-    public String agregarFanatico(Model model,  @PathVariable Integer id) {
-        model.addAttribute("idDisquera", id);
-        model.addAttribute("fanatico", new Fanaticos());
-        return "agregarFanatico"; // nombre del HTML
-    }
-
-
-    @PostMapping("/agregarFanatico")
-    public String agregarFanatico(Model model,
-                          @RequestParam(required=true, name ="idDisquera") Integer idDisquera,
+    @PostMapping("/ingresarFanatico")
+    public String ingresarFanatico(Model model,
                           @RequestParam(required=true, name ="nombreFanatico") String nombreFanatico,
                           @RequestParam(required=true, name ="paisOrigen") String paisOrigen,
                           @RequestParam(required=true, name ="edad") Integer edad,
@@ -168,26 +159,89 @@ public class ArtistaController {
         //implementé este metodo para evitar error de fecha
         LocalDateTime fechaCompleta = fecha.atStartOfDay();
 
-        Fanaticos fanatico = new Fanaticos(nombreFanatico,paisOrigen,edad,fechaCompleta,plataforma);
+        Fanaticos fanatico = new Fanaticos();
+        fanatico.setNombreFanatico(nombreFanatico);
+        fanatico.setPaisOrigen(paisOrigen);
+        fanatico.setEdad(edad);
+        fanatico.setFechaRegistro(fechaCompleta);
+        fanatico.setPlataforma(plataforma);
+
+        fanaticosRepo.save(fanatico);
+
+        model.addAttribute("fanaticos", fanaticosRepo.findAll());
+
+        return "menuFanaticos";
+    }
+
+    @GetMapping("/verFanaticos")
+    public String verFanaticos(Model model) {
+
+        model.addAttribute("fanaticos", fanaticosRepo.findAll());
+        return "menuFanaticos";
+    }
+
+    @GetMapping("/agregarDisquera/{id}")
+    public String agregarDisquera(
+            Model model,
+            @PathVariable String id) {
+
+        model.addAttribute("idFanatico", id);
+        model.addAttribute("disquera",disqueraRepo.findAll());
+        return "agregarDisquera";
+    }
+
+    // agregar una disquera a un fanatico:
+    @PostMapping("/asignarDisquera")
+    public String asignarDisquera(
+            Model model,
+            @RequestParam(required=true, name ="idFanatico") String idFanatico,
+            @RequestParam(required=true, name ="idDisquera") String idDisquera) {
 
         Optional<Disquera> disqueraById = disqueraRepo.findById(Integer.valueOf(idDisquera));
         Disquera disquera = disqueraById.orElse(new Disquera());
 
-        disquera.addFanatico(fanatico);
-        disqueraRepo.save(disquera);
+        Optional<Fanaticos> fanaticoById = fanaticosRepo.findById(Integer.valueOf(idFanatico));
+        Fanaticos fanatico = fanaticoById.orElse(new Fanaticos());
 
-        return "redirect:/artistas/menuFanaticos";
+        fanatico.addDisquera(disquera);
+
+        fanaticosRepo.save(fanatico);
+
+        return "redirect:/anuncios/verFanaticos";
     }
 
-    @GetMapping("/verFanaticos/{id}")
-    public String verFanaticos(Model model, @PathVariable String id) {
+    // ver todas las disqueras que hay en los fanaticos con id:
+    @GetMapping("/verDisqueras/{id}")
+    public String verDisqueras(
+            Model model,
+            @PathVariable String id) {
+
+        Optional<Fanaticos> fanaticoById = fanaticosRepo.findById(Integer.valueOf(id));
+        Fanaticos fanatico = fanaticoById.orElse(new Fanaticos());
+
+        Set<Integer> disquerasIds = fanatico.getDisqueraIds();
+
+        Iterable<Disquera> disquerasDeFanatico = disqueraRepo.findAllById(disquerasIds);
+
+        model.addAttribute("fanaticos", fanaticosRepo);
+        model.addAttribute("disqueras",disquerasDeFanatico);
+        return "disquerasFanaticos";
+    }
+    //Ver los fanaticos de la disquera con id:
+    @GetMapping("/fanaticosDisquera/{id}")
+    public String verFanaticosDisquera(
+            Model model,
+            @PathVariable String id) {
 
         Optional<Disquera> disqueraById = disqueraRepo.findById(Integer.valueOf(id));
         Disquera disquera = disqueraById.orElse(new Disquera());
 
-        Set<Fanaticos> fanaticos = disquera.getFanaticos();
+        Iterable<Fanaticos> fanaticosByDisqueraId = fanaticosRepo.findByDisqueraId(disquera.getId());
 
-        model.addAttribute("fanaticos", fanaticos);
-        return "verFanaticos";
+        model.addAttribute("fanaticos", fanaticosByDisqueraId);
+
+        return "fanaticosDeLaDisquera";
     }
+
+
 }
