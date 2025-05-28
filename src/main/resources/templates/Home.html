@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Ingresar nuevo artista</title>
 
-<!--    <link href="/static/css/styleArtist.css" rel="stylesheet" />-->
+<!--    <link href="/static/css/homeStyleArtist.css" rel="stylesheet" />-->
     <link th:href="@{/css/styleArtistDisqueraForm.css}" rel="stylesheet" />
 
 
@@ -13,10 +13,11 @@
 
 <form th:action="@{/artistas/ingresar}" method="post" th:object="${dto}" class="mt-4">
 
-    <div id="music-project">
-        <img id="headphones" src="/Images/headphones.png" alt="headphones">
-        <h2 id="creador">Music Project</h2>
-    </div>
+        <div id="music-project">
+            <img id="headphones" src="/Images/headphones.png" alt="headphones">
+            <h2 id="creador">Music Project</h2>
+        </div>
+
 
     <h1 id="main-tittle">ARTISTAS Y DISQUERAS</h1>
 
@@ -108,8 +109,9 @@
         <a href="/artistas/listarArtistas" id="btn-artista">Ver Artistas</a>
     </div>
 
-
-</form>
+    <form method="get" action="/">
+        <button id="volver" name="volver" type="submit">Volver</button>
+    </form>
 
 
 

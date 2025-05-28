@@ -71,6 +71,16 @@ select:hover{
 
 }
 
+/*Boton para regresar a la inicio*/
+#volver{
+    /*width: 130%;*/
+    margin-left: 10px;
+    height: 54px;
+    display: flex;
+    justify-content: center;  /* Para centrar horizontalmente los elementos (el texto) */
+    align-items: center;      /* Y este para centrar verticalmente los elementos */
+
+}
 
 .botones {
     display: flex;

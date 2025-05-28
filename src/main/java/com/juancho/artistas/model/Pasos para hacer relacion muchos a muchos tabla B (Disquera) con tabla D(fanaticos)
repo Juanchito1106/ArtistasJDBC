@@ -1,0 +1,30 @@
+
+1. Hacer los modelos de Disquera y Fanaticos (no hay que pasarles nada de nada a estos)
+
+2. Luego para hacer la relación muchos a muchos se crea
+- Modelo Disquera, con su tabla
+- Modelo Fanatico, con su tabla
+- Clase Disquera_Fanatico con su tabla en SQL
+
+Básicamente se hace todo como está normal y se crea la intersección
+
+3. En la clase  disquera_fanatico se añade id disquera y nombre de la disquera
+
+4. La linea de HashSet many to many va en Fanaticos
+    private Set<DisqueraFanatico> Disquera = new HashSet<>();
+
+5. Luego crear la una interfaz fanaticos y hacerle la logica para hacer la relación
+muchos a muchos, fanaticos - disquera
+
+
+
+
+Nota: En el punto 5 debemos ingresar fanaticos de forma ----> independiente
+
+El punto 6 es para ver esos contratos que acabamos de registrar de forma independiente
+
+En la interfaz del punto 6 deben haber 2 botones (punto 7 y 8)
+Agregar Disquera
+Ver Disquera
+
+src\main\resources\application.properties mirar el git ignore pa esto
