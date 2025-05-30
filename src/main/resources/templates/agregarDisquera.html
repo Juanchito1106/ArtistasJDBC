@@ -6,7 +6,7 @@
   <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Agergar Disquera</h1>
+<h1>Agregar Disquera</h1>
 <table>
   <tr>
     <th>Id</th>
@@ -23,7 +23,9 @@
         <form method="post" action="/artistas/asignarDisquera">
           <input type="hidden" th:attr="name='idFanatico'" th:value="${idFanatico}" />
           <input type="hidden" th:attr="name='idDisquera'" th:value="${d.id}" />
-          <input value="Agregar" type="submit" placeholder="Ingresar Disquera" /> <br/>
+          <input class="btn" value="Agregar Disquera" type="submit" placeholder="Ingresar Disquera" /> <br/>
+<!--          <button type="submit" ><a >Agregar Disquera</a></button>-->
+
         </form>
       </td>
     </tr>

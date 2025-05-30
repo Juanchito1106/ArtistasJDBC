@@ -25,7 +25,8 @@ tr:nth-child(even) {
     background-color: #3d3a3a;
 }
 
-button {
+button,
+.btn{
     background-color: #bac8d3;
     border-radius: 24px;
     color: #666464;
@@ -36,8 +37,17 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
+button:hover,
+.btn:hover{
     transform: scale(1.05);
     cursor: pointer;
     color: black;
+}
+
+
+/*Esto es para poner el mensaje de error en rojo*/
+.error{
+    color: red;
+    font-weight: bold;
+
 }

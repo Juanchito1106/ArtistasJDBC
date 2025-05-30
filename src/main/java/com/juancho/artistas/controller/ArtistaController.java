@@ -203,11 +203,21 @@ public class ArtistaController {
         Optional<Fanaticos> fanaticoById = fanaticosRepo.findById(Integer.valueOf(idFanatico));
         Fanaticos fanatico = fanaticoById.orElse(new Fanaticos());
 
-        fanatico.addDisquera(disquera);
+        Set<Integer> disquerasIds = fanatico.getDisqueraIds();
 
-        fanaticosRepo.save(fanatico);
+        String mensajeError = "prueba";
 
-        return "redirect:/anuncios/verFanaticos";
+        if (disquerasIds.contains(Integer.valueOf(idDisquera))) {
+            mensajeError = "La disquera ya se ha asignado al fanatico con id "+idFanatico;
+        } else {
+            fanatico.addDisquera(disquera);
+            fanaticosRepo.save(fanatico);
+        }
+
+        model.addAttribute("mensajeError", mensajeError);
+        model.addAttribute("fanaticos", fanaticosRepo.findAll());
+
+        return "menuFanaticos";
     }
 
     // ver todas las disqueras que hay en los fanaticos con id:
@@ -223,7 +233,7 @@ public class ArtistaController {
 
         Iterable<Disquera> disquerasDeFanatico = disqueraRepo.findAllById(disquerasIds);
 
-        model.addAttribute("fanaticos", fanaticosRepo);
+        model.addAttribute("fanatico", fanatico);
         model.addAttribute("disqueras",disquerasDeFanatico);
         return "disquerasFanaticos";
     }

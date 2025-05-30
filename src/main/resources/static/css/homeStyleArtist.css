@@ -1,6 +1,7 @@
 body  {
 
-
+    background-color: black;
+    color: white;
 }
 
 
@@ -86,4 +87,12 @@ select:hover{
     display: flex;
     align-items: center; /* Alinea verticalmente los botones */
     margin-top: 20px;
+}
+
+.botones-fanatico{
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacio vertical entre los formularios */
+    /*align-items: flex-start; */
 }

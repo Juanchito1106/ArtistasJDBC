@@ -1,0 +1,86 @@
+Crear la base de datos
+CREATE DATABASE artistasdb;
+USE artistasdb;
+
+Tabla: artista
+CREATE TABLE artista (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombreArtistico VARCHAR(255) NOT NULL,
+    edad INT NOT NULL,
+    fechaNacimiento TIMESTAMP NOT NULL,
+    nacionalidad VARCHAR(255) NOT NULL,
+    genero ENUM('POP', 'ROCK', 'RAP', 'REGGAETON', 'ELECTRONICA', 'SALSA', 'HIPHOP') NOT NULL,
+    disqueraid INT,
+    FOREIGN KEY (disqueraid) REFERENCES disquera(id)
+);
+
+
+
+Tabla: disquera
+CREATE TABLE disquera (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombreDisquera VARCHAR(255) NOT NULL,
+    pais VARCHAR(255) NOT NULL,
+    numeroArtistas INT NOT NULL,
+    fundacion TIMESTAMP NOT NULL,
+    contrato ENUM('EXCLUSIVO', 'DISTRIBUCION', 'LICENCIA', 'CONTRATO_360') NOT NULL
+);
+
+
+
+
+Tabla: canciones
+CREATE TABLE canciones (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombreCancion VARCHAR(255) NOT NULL,
+    fechaSalida TIMESTAMP NOT NULL,
+    duracion INT NOT NULL,
+    reproducciones INT NOT NULL,
+    estado ENUM('EN_PRODUCCION', 'PUBLICADA', 'INEDITA', 'DEMO', 'SUSPENDIDA') NOT NULL,
+    artista INT ,
+    FOREIGN KEY (artista) REFERENCES artista(id)
+);
+
+
+
+Tabla: fanaticos
+CREATE TABLE fanaticos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombreFanatico VARCHAR(255) NOT NULL,
+    paisOrigen VARCHAR(255) NOT NULL,
+    edad VARCHAR(255) NOT NULL,
+    fechaRegistro TIMESTAMP NOT NULL,
+    plataforma ENUM('SPOTIFY', 'YOUTUBE', 'APPLE_MUSIC', 'DEEZER', 'AMAZON_MUSIC') NOT NULL
+);
+
+
+Tabla: disquera_fanatico
+CREATE TABLE disquera_fanatico (
+    disquera INT NOT NULL,
+    fanaticos INT NOT NULL,
+    nameDisquera VARCHAR(255) NOT NULL,
+    PRIMARY KEY (disquera, fanaticos),
+    FOREIGN KEY (disquera) REFERENCES disquera(id),
+    FOREIGN KEY (fanaticos) REFERENCES fanaticos(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

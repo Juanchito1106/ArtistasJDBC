@@ -4,31 +4,38 @@
   <meta charset="UTF-8">
   <title>Menu Fanatico</title>
   <link th:href="@{/css/verArtistasStyle.css}" rel="stylesheet" />
+
+
 </head>
 <body>
-<h1>Fanaticos</h1>
-<table>
-  <tr>
-    <th>Id</th>
-    <th>Nombre</th>
-    <th>Plataforma Favorita</th>
-    <th>Agregar Disquera</th>
-    <th>Ver Disqueras</th>
-  </tr>
-  <th:block th:each="f : ${fanaticos}">
+
+  <br />
+  <div th:text="${mensajeError}" class="error"  ></div>
+  <br />
+
+  <h1>Fanaticos</h1>
+  <table>
     <tr>
-      <td th:text="${f.id}"></td>
-      <td th:text="${f.nombreFanatico}"></td>
-      <td th:text="${f.plataforma}"></td>
-      <td><button type="submit" ><a th:href="@{|/artistas/agregarDisquera/${f.id}|}">Agregar Disquera</a></button></td>
-      <td><button type="submit" ><a th:href="@{|/artistas/verDisqueras/${f.id}|}">Ver Disquera</a></button></td>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Plataforma Favorita</th>
+      <th>Agregar Disquera</th>
+      <th>Ver Disqueras</th>
     </tr>
-  </th:block>
-</table>
-<br>
-<form method="get" action="/artistas">
-  <button id="btn-volver">Volver Artistas</button>
-</form></td>
+    <th:block th:each="f : ${fanaticos}">
+      <tr>
+        <td th:text="${f.id}"></td>
+        <td th:text="${f.nombreFanatico}"></td>
+        <td th:text="${f.plataforma}"></td>
+        <td><button type="submit" ><a th:href="@{|/artistas/agregarDisquera/${f.id}|}">Agregar Disquera</a></button></td>
+        <td><button type="submit" ><a th:href="@{|/artistas/verDisqueras/${f.id}|}">Ver Disquera</a></button></td>
+      </tr>
+    </th:block>
+  </table>
+  <br>
+  <form method="get" action="/artistas/agregarFanatico">
+    <button id="btn-volver">Volver</button>
+  </form></td>
 
 </body>
 </html>
