@@ -14,39 +14,58 @@
 
 <div class="div-form">
     <h1 id="cancion-tittle">Agregar Canción</h1>
-    <form method="post" action="/artistas/agregarCancion" th:object="${cancion}">
+    <form method="post" action="/artistas/agregarCancion">
 
         <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
 
-        <div class="input-con-label">
-            <label for="nombreCancion">Nombre Canción:</label>
-            <input id="nombreCancion" name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" />
+        <div th:object="${cancion}">
+            <div class="input-con-label">
+                <label for="nombreCancion">Nombre Canción:</label>
+                <input id="nombreCancion" name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" />
+                <span th:if="${#fields.hasErrors('nombreCancion')}"
+                      th:errors="*{nombreCancion}" class="error"></span>
+            </div>
         </div>
 
-        <div class="input-con-label">
-            <label for="fechaSalida">Fecha de salida:</label>
-            <input id="fechaSalida" name="fechaSalida" type="date" th:field="*{fechaSalida}" />
+        <div th:object="${cancion}">
+            <div class="input-con-label">
+                <label for="fechaSalida">Fecha de salida:</label>
+                <input id="fechaSalida" name="fechaSalida" type="date" th:field="*{fechaSalida}" />
+                <span th:if="${#fields.hasErrors('fechaSalida')}"
+                      th:errors="*{fechaSalida}" class="error"></span>
+            </div>
         </div>
 
-        <div class="input-con-label">
-            <label for="duracion">Duración de la canción:</label>
-            <input id="duracion" name="duracion" type="number" placeholder="Duración de la canción" th:field="*{duracion}" />
+        <div th:object="${cancion}">
+            <div class="input-con-label">
+                <label for="duracion">Duración de la canción:</label>
+                <input id="duracion" name="duracion" type="number" placeholder="Duración de la canción" th:field="*{duracion}" />
+                <span th:if="${#fields.hasErrors('duracion')}"
+                      th:errors="*{duracion}" class="error"></span>
+            </div>
         </div>
 
-        <div class="input-con-label">
-            <label for="reproducciones">Reproducciones:</label>
-            <input id="reproducciones" name="reproducciones" type="number" placeholder="Reproducciones de la canción" th:field="*{reproducciones}" />
+
+            <div th:object="${cancion}">
+            <div class="input-con-label">
+                <label for="reproducciones">Reproducciones:</label>
+                <input id="reproducciones" name="reproducciones" type="number" placeholder="Reproducciones de la canción" th:field="*{reproducciones}" />
+                <span th:if="${#fields.hasErrors('reproducciones')}"
+                      th:errors="*{reproducciones}" class="error"></span>
+            </div>
         </div>
 
-        <div class="input-con-label">
-            <label for="estadoCancion">Estado de la canción:</label>
-            <select id="estadoCancion" name="Estado Canción" th:field="*{estado}">
-                <option value="EN_PRODUCCION">EN_PRODUCCION</option>
-                <option value="PUBLICADA">PUBLICADA</option>
-                <option value="INEDITA">INEDITA</option>
-                <option value="DEMO">DEMO</option>
-                <option value="SUSPENDIDA">SUSPENDIDA</option>
-            </select>
+        <div th:object="${cancion}">
+            <div class="input-con-label">
+                <label for="estadoCancion">Estado de la canción:</label>
+                <select id="estadoCancion" name="Estado Canción" th:field="*{estado}">
+                    <option value="EN_PRODUCCION">EN_PRODUCCION</option>
+                    <option value="PUBLICADA">PUBLICADA</option>
+                    <option value="INEDITA">INEDITA</option>
+                    <option value="DEMO">DEMO</option>
+                    <option value="SUSPENDIDA">SUSPENDIDA</option>
+                </select>
+            </div>
         </div>
 
         <div class="div-botones">
@@ -60,8 +79,15 @@
     </form>
 </div>
 
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script th:if="${cancionCreada}">
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'Canción creada correctamente.',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
 
 </body>
 </html>

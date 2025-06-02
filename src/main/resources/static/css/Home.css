@@ -296,3 +296,9 @@ label{
     bottom: 20%;
 }
 
+/*Esto es para poner el mensaje de error en rojo*/
+.error{
+    color: red;
+    font-weight: bold;
+
+}

@@ -1,7 +1,11 @@
 package com.juancho.artistas.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import com.juancho.artistas.enums.EstadoCancion;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -14,13 +18,20 @@ public class Canciones {
     @Id
     private Integer id;
 
+    @NotBlank(message= "Name is required")
     @Column("nombreCancion")
     private String nombreCancion;
 
+    @NotNull(message = "Date drop is required")
     @Column("fechaSalida")
-    private LocalDateTime fechaSalida;
+    private LocalDate fechaSalida;
+
+    @NotNull(message = "Duration drop is required")
     private Integer duracion; //duración en minutos
+
+    @NotNull(message = "Reproductions drop is required")
     private Integer reproducciones;
+
     private EstadoCancion estado;
 
     //Uno a muchos
@@ -34,7 +45,7 @@ public class Canciones {
     }
 
 
-    public Canciones(String nombreCancion, LocalDateTime fechaSalida, Integer duracion, Integer reproducciones,
+    public Canciones(String nombreCancion, LocalDate fechaSalida, Integer duracion, Integer reproducciones,
                      EstadoCancion estado) {
 
         super();
@@ -55,12 +66,12 @@ public class Canciones {
     }
 
 
-    public LocalDateTime getFechaSalida() {
+    public LocalDate getFechaSalida() {
         return fechaSalida;
     }
 
 
-    public void setFechaSalida(LocalDateTime fechaSalida) {
+    public void setFechaSalida(LocalDate fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
 

@@ -3,6 +3,7 @@ package com.juancho.artistas.model;
 import java.time.LocalDateTime;
 import com.juancho.artistas.enums.GeneroMusical;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import java.time.LocalDate;
@@ -26,10 +27,10 @@ public class Artista {
     @Column("nombreArtistico")
     private String nombreArtistico;
 
-    @NotBlank(message= "Age is required")
+    @NotNull(message = "Age is required")
     private Integer edad;
 
-    @NotBlank(message= "Date is required")
+    @NotNull(message = "Date is required")
     @Column("fechaNacimiento")
     private LocalDate fechaNacimiento;
 

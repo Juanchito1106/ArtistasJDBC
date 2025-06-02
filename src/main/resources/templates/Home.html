@@ -28,21 +28,29 @@
         <div class="artist-input-label">
             <label>Nombre Artístico:</label>
             <input name="name" type="text" placeholder="Nombre del artista" th:field="*{nombreArtistico}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('nombreArtistico')}"
+                  th:errors="*{nombreArtistico}" class="error"></span>
         </div>
 
         <div class="artist-input-label">
             <label>Edad del artista: </label>
             <input name="edad" type="number" placeholder="Edad del artista" th:field="*{edad}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('edad')}"
+                  th:errors="*{edad}" class="error"></span>
         </div>
 
         <div class="artist-input-label">
             <label>Fecha de nacimiento: </label>
             <input name="fechaNacimiento" type="date"  th:field="*{fechaNacimiento}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('fechaNacimiento')}"
+                  th:errors="*{fechaNacimiento}" class="error"></span>
         </div>
 
         <div class="artist-input-label">
             <label>Nacionalidad:</label>
             <input name="nacionalidad" type="text" placeholder="Nacionalidad del artista" th:field="*{nacionalidad}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('nacionalidad')}"
+                  th:errors="*{nacionalidad}" class="error"></span>
         </div>
 
         <div class="artist-input-label">
@@ -72,21 +80,29 @@
         <div class="input-con-label">
             <label>Nombre de la Disquera:</label>
             <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('nombreDisquera')}"
+                  th:errors="*{nombreDisquera}" class="error"></span>
         </div>
 
         <div class="input-con-label">
             <label>País: </label>
             <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('pais')}"
+                  th:errors="*{pais}" class="error"></span>
         </div>
 
         <div class="input-con-label">
             <label>Número de artistas: </label>
             <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('numeroArtistas')}"
+                  th:errors="*{numeroArtistas}" class="error"></span>
         </div>
 
         <div class="input-con-label">
             <label>Fundación:</label>
             <input name="fundacion" type="date"  th:field="*{fundacion}" ><br/><br/>
+            <span th:if="${#fields.hasErrors('fundacion')}"
+                  th:errors="*{fundacion}" class="error"></span>
         </div>
 
         <div class="input-con-label">

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.juancho.artistas.enums.TipoContrato;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -29,11 +30,11 @@ public class Disquera {
     @Size (min= 2, max=80, message ="Country must be between 2 and 80 characters")
     private String pais;
 
-    @NotBlank(message= "Number Artist is required")
+    @NotNull(message= "Number Artist is required")
     @Column("numeroArtistas")
     private Integer numeroArtistas;
 
-    @NotBlank(message= "Date is required")
+    @NotNull(message= "Date is required")
     private LocalDate fundacion;
 
     private TipoContrato contrato;

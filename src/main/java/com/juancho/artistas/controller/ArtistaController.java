@@ -11,9 +11,11 @@ import com.juancho.artistas.model.*;
 import com.juancho.artistas.repositories.ArtistasRepositorio;
 import com.juancho.artistas.repositories.DisqueraRepositorio;
 import com.juancho.artistas.repositories.FanaticosRepositorio;
+import jakarta.validation.Valid;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -39,7 +41,14 @@ public class ArtistaController {
 
 
     @PostMapping("/ingresar")
-    public String addArtistPost(@ModelAttribute RegistroDTO dto) {
+    public String addArtistPost(@Valid @ModelAttribute RegistroDTO dto,
+                                BindingResult bindingResult,
+                                Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("dto", dto);
+            return "Home";
+        }
 
         // 1. Crearé primero una nueva disquera
         Disquera disquera = new Disquera();
@@ -96,32 +105,25 @@ public class ArtistaController {
 
         @PostMapping("/agregarCancion")
         public String nuevaCancion(
-                @RequestParam(required=true, name ="idArtista") Integer idArtista,
-                @RequestParam(required=true, name ="nombreCancion") String nombreCancion,
-                @RequestParam(required=true, name ="fechaSalida") String fechaSalida,
-                @RequestParam(required=true, name ="duracion") Integer duracion,
-                @RequestParam(required=true, name ="reproducciones") Integer reproducciones,
-                @RequestParam(required=true, name ="estado") EstadoCancion estado){
+                @Valid @ModelAttribute("cancion") Canciones canciones,
+                BindingResult cancionBindingResult,
+                @RequestParam(required=true, name ="idArtista") String idArtista,
+                Model model) {
 
-            String[] partes = fechaSalida.split("-");
+            if (cancionBindingResult.hasErrors()) {
+                return "agregarCancion";
+            }
 
-            LocalDate fecha = LocalDate.of(Integer.valueOf(partes[0]),
-                    Integer.valueOf(partes[1]),
-                    Integer.valueOf(partes[2]));
-
-
-//            implementé este metodo para evitar error de fecha
-            LocalDateTime fechaCompleta = fecha.atStartOfDay();
-
-            Canciones cancion = new Canciones(nombreCancion,fechaCompleta,duracion,reproducciones,estado);
 
             Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(idArtista));
             Artista artista = artistaById.orElse(new Artista());
-
-            artista.addCancion(cancion);
+            artista.addCancion(canciones);
             artistaRepo.save(artista);
 
-            return "redirect:/artistas/menuCanciones";
+            model.addAttribute("idArtista", idArtista);
+            model.addAttribute("cancion", new Canciones()); // Limpiar campos
+            model.addAttribute("cancionCreada", true);
+            return "agregarCancion";
         }
 
     @GetMapping("/verCanciones/{id}")
