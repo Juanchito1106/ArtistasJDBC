@@ -3,49 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Fanatico</title>
-    <link th:href="@{/css/homeStyleArtist.css}" rel="stylesheet" />
+    <link th:href="@{/css/agregarCancionFanatico.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Ingrese un nuevo fanatico</h1>
+
+<img id="logo" src="/Images/fan.png" alt="cancion-logo">
+<img id="logo-2" src="/Images/fan.png" alt="cancion-logo">
+
+<div class="div-form">
+    <h1>Ingrese un nuevo fanático</h1>
+
+    <form method="post" action="/artistas/ingresarFanatico">
+
+        <div class="input-con-label">
+            <label for="nombreFanatico">Nombre del Fanático:</label>
+            <input id="nombreFanatico" name="nombreFanatico" type="text" placeholder="Nombre del Fanático" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="paisOrigen">País de Origen:</label>
+            <input id="paisOrigen" name="paisOrigen" type="text" placeholder="País del Fanático" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="edad">Edad:</label>
+            <input id="edad" name="edad" type="number" placeholder="Edad del Fanático" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="fechaRegistro">Fecha de registro:</label>
+            <input id="fechaRegistro" name="fechaRegistro" type="date" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="plataforma">Plataforma favorita:</label>
+            <select id="plataforma" name="plataforma">
+                <option value="SPOTIFY">SPOTIFY</option>
+                <option value="YOUTUBE">YOUTUBE</option>
+                <option value="APPLE_MUSIC">APPLE_MUSIC</option>
+                <option value="DEEZER">DEEZER</option>
+                <option value="AMAZON_MUSIC">AMAZON_MUSIC</option>
+            </select>
+        </div>
+
+        <div class="div-botones-fanatico">
+            <button id="crear-fanatico" name="crear-fanatico" type="submit">Crear fanático</button>
 
 
-<form method="post" action="/artistas/ingresarFanatico" >
-
-
-    <label>Nombre del Fanatico:</label>
-    <input name="nombreFanatico" type="text" placeholder="Nombre del Fanatico" ><br/><br/>
-
-    <label>Pais de Origen:</label>
-    <input name="paisOrigen" type="text" placeholder="Pais del Fanatico" ><br/><br/>
-
-    <label>Edad: </label>
-    <input name="edad" type="number" placeholder="Edad del fanatico" ><br/><br/>
-
-    <label>Fecha de registro: </label>
-    <input name="fechaRegistro" type="date"  ><br/><br/>
-
-    <label>Plataforma favorita: </label>
-    <select name="plataforma" >
-        <option value="SPOTIFY">SPOTIFY</option>
-        <option value="YOUTUBE">YOUTUBE</option>
-        <option value="APPLE_MUSIC">APPLE_MUSIC</option>
-        <option value="DEEZER">DEEZER</option>
-        <option value="AMAZON_MUSIC">AMAZON_MUSIC</option>
-    </select><br/><br/>
-
-    <button id="crear-fanatico" name="crear-fanatico" type="submit">Crear fanatico</button>
-
-</form>
-
-<br/>
-<div class="botones-fanatico">
-    <form method="get" action="/artistas">
-        <button>Volver</button>
     </form>
+
+    <br/>
 
     <form method="get" action="/artistas/verFanaticos">
-        <button> Ver fanaticos</button>
+        <button id="btn-artista">Ver fanáticos</button>
     </form>
 </div>
+
+</div>
+
+<form method="get" action="/artistas">
+    <button id="volver">Volver</button>
+</form>
+
 </body>
 </html>

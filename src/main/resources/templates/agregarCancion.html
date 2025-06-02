@@ -3,43 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Cancion</title>
-    <link th:href="@{/css/homeStyleArtist.css}" rel="stylesheet" />
+    <link th:href="@{/css/agregarCancionFanatico.css}" rel="stylesheet" />
 </head>
 <body>
-<h1>Agregar Cancion</h1>
-<form method="post" action="/artistas/agregarCancion" th:object="${cancion}">
-
-    <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
-
-    <label>Nombre Cancion:</label>
-    <input name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" ><br/><br/>
 
 
-    <label>Fecha de salida: </label>
-    <input name="fechaSalida" type="date"  th:field="*{fechaSalida}" ><br/><br/>
+<img id="logo" src="/Images/song.png" alt="cancion-logo">
+<img id="logo-2" src="/Images/song.png" alt="cancion-logo">
 
-    <label>Duración de la canción: </label>
-    <input name="duracion" type="number" placeholder="Duración de la canción" th:field="*{duracion}" ><br/><br/>
 
-    <label>Reproducciones: </label>
-    <input name="reproducciones" type="number" placeholder="Reproducciones de la canción" th:field="*{reproducciones}" ><br/><br/>
+<div class="div-form">
+    <h1 id="cancion-tittle">Agregar Canción</h1>
+    <form method="post" action="/artistas/agregarCancion" th:object="${cancion}">
 
-    <label>Estado de la canción: </label>
-    <select name="Estado Canción" th:field="*{estado}">
-        <option value="EN_PRODUCCION">EN_PRODUCCION</option>
-        <option value="PUBLICADA">PUBLICADA</option>
-        <option value="INEDITA">INEDITA</option>
-        <option value="DEMO">DEMO</option>
-        <option value="SUSPENDIDA">SUSPENDIDA</option>
-    </select><br/><br/>
+        <input type="hidden" th:attr="name='idArtista'" th:value="${idArtista}" />
 
-    <button id="crear-cancion" name="crear-cancion" type="submit">Crear Canción</button>
+        <div class="input-con-label">
+            <label for="nombreCancion">Nombre Canción:</label>
+            <input id="nombreCancion" name="name" type="text" placeholder="Nombre de la canción" th:field="*{nombreCancion}" />
+        </div>
 
-</form>
+        <div class="input-con-label">
+            <label for="fechaSalida">Fecha de salida:</label>
+            <input id="fechaSalida" name="fechaSalida" type="date" th:field="*{fechaSalida}" />
+        </div>
 
-<br/>
-<form method="get" action="/artistas/menuCanciones">
-    <button>Volver Artistas</button>
-</form>
+        <div class="input-con-label">
+            <label for="duracion">Duración de la canción:</label>
+            <input id="duracion" name="duracion" type="number" placeholder="Duración de la canción" th:field="*{duracion}" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="reproducciones">Reproducciones:</label>
+            <input id="reproducciones" name="reproducciones" type="number" placeholder="Reproducciones de la canción" th:field="*{reproducciones}" />
+        </div>
+
+        <div class="input-con-label">
+            <label for="estadoCancion">Estado de la canción:</label>
+            <select id="estadoCancion" name="Estado Canción" th:field="*{estado}">
+                <option value="EN_PRODUCCION">EN_PRODUCCION</option>
+                <option value="PUBLICADA">PUBLICADA</option>
+                <option value="INEDITA">INEDITA</option>
+                <option value="DEMO">DEMO</option>
+                <option value="SUSPENDIDA">SUSPENDIDA</option>
+            </select>
+        </div>
+
+        <div class="div-botones">
+            <button id="crear-cancion" name="crear-cancion" type="submit">Crear Canción</button>
+    </form>
+
+    <br/>
+
+    <form method="get" action="/artistas/menuCanciones">
+        <button>Volver Artistas</button>
+    </form>
+</div>
+
+</div>
+
+
 </body>
 </html>

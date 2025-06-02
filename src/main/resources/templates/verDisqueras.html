@@ -24,18 +24,15 @@
       <td th:text="${d.numeroArtistas}"></td>
       <td th:text="${d.fundacion}"></td>
       <td th:text="${d.contrato}"></td>
-      <td>
-        <form method="get" action="/artistas/menuFanaticos">
-          <button>Fanaticos</button>
-        </form>
-      </td>
+      <td><button><a th:href="@{|/artistas/fanaticosDisquera/${d.id}|}">Fanaticos</a></button></td>
+
     </tr>
   </th:block>
 
 </table>
 <br/><br/>
 <form method="get" action="/artistas/listarArtistas">
-  <button id="btn-volver">Volver</button>
+  <button id="btn-volver">Volver Artistas</button>
 </form>
 
 </body>

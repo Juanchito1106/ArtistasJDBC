@@ -237,6 +237,7 @@ public class ArtistaController {
         model.addAttribute("disqueras",disquerasDeFanatico);
         return "disquerasFanaticos";
     }
+
     //Ver los fanaticos de la disquera con id:
     @GetMapping("/fanaticosDisquera/{id}")
     public String verFanaticosDisquera(
