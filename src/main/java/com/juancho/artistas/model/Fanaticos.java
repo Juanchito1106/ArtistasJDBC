@@ -1,11 +1,15 @@
 package com.juancho.artistas.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.juancho.artistas.enums.PlataformaFavorita;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import com.juancho.artistas.model.Disquera;
 import org.springframework.data.relational.core.mapping.Column;
@@ -18,16 +22,22 @@ public class Fanaticos {
     @Id
     private Integer id;
 
+    @NotBlank(message= "Name is required")
+    @Size(min= 3, max=80, message ="Name must be between 3 and 80 characters")
     @Column("nombreFanatico")
     private String nombreFanatico;
 
+    @NotBlank(message= "Country is required")
+    @Size(min= 3, max=80, message ="Country must be between 3 and 80 characters")
     @Column("paisOrigen")
     private String paisOrigen;
 
+    @NotNull(message = "Age is required")
     private Integer edad;
 
+    @NotNull(message = "Date is required")
     @Column("fechaRegistro")
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     private PlataformaFavorita plataforma;
 
@@ -37,7 +47,7 @@ public class Fanaticos {
     }
 
 
-    public Fanaticos(String nombreFanatico, String paisOrigen, Integer edad, LocalDateTime fechaRegistro,
+    public Fanaticos(String nombreFanatico, String paisOrigen, Integer edad, LocalDate fechaRegistro,
                      PlataformaFavorita plataforma) {
         super();
         this.nombreFanatico = nombreFanatico;
@@ -85,12 +95,12 @@ public class Fanaticos {
     }
 
 
-    public LocalDateTime getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

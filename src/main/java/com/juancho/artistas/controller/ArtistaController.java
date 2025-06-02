@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
-import com.juancho.artistas.enums.EstadoCancion;
-import com.juancho.artistas.enums.PlataformaFavorita;
 import com.juancho.artistas.model.*;
 import com.juancho.artistas.repositories.ArtistasRepositorio;
 import com.juancho.artistas.repositories.DisqueraRepositorio;
@@ -35,42 +33,39 @@ public class ArtistaController {
 
     @GetMapping
     public String mostrarFormulario(Model model) {
-        model.addAttribute("dto", new RegistroDTO());
+        model.addAttribute("artista", new Artista());
+        model.addAttribute("disquera", new Disquera());
         return "Home"; // nombre del HTML
     }
 
-
+    // Ingresa un nuevo Artista y una Disquera a la base de datos.
     @PostMapping("/ingresar")
-    public String addArtistPost(@Valid @ModelAttribute RegistroDTO dto,
-                                BindingResult bindingResult,
+    public String addArtistPost(@Valid @ModelAttribute ("artista") Artista artista,
+                                BindingResult artistabindingResult,
+                                @Valid @ModelAttribute ("disquera") Disquera disquera,
+                                BindingResult disquerabindingResult,
                                 Model model) {
 
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("dto", dto);
+        if (artistabindingResult.hasErrors() || disquerabindingResult.hasErrors()) {
             return "Home";
         }
 
-        // 1. Crearé primero una nueva disquera
-        Disquera disquera = new Disquera();
-        disquera.setNombreDisquera(dto.getNombreDisquera());
-        disquera.setPais(dto.getPais());
-        disquera.setNumeroArtistas(dto.getNumeroArtistas());
-        disquera.setFundacion(dto.getFundacion());
-        disquera.setContrato(dto.getContrato());
-        disqueraRepo.save(disquera);
+        // Obtenemos el objeto Disquera con su Id generado
+        AggregateReference<Disquera,Integer> disqueraAggregate = AggregateReference.to(
+                disqueraRepo.save(disquera).getId());
 
-        // 2. Luego creo un artista con referencia a la disquera creada
-        Artista artista = new Artista();
-        artista.setNombreArtistico(dto.getNombreArtistico());
-        artista.setEdad(dto.getEdad());
-        artista.setFechaNacimiento(dto.getFechaNacimiento());
-        artista.setNacionalidad(dto.getNacionalidad());
-        artista.setGenero(dto.getGenero());
-        artista.setDisquera(AggregateReference.to(disquera.getId()));
+        // Le asigno el id de la Disquera al Artista ya que es clave foránea
+        artista.setDisquera(disqueraAggregate);
 
+        // Se ingresa en la tabla al Artista
         artistaRepo.save(artista);
 
-        return "registroExitoso";
+        model.addAttribute("artistas", artistaRepo.findAll());
+        model.addAttribute("artista", new Artista());
+        model.addAttribute("disquera", new Disquera());// Para limpiar campos
+        model.addAttribute("artistaDisqueraCreados", true); // ✅ Artistas y disquera creados
+
+        return "Home";
     }
 
     @GetMapping("/listarArtistas")
@@ -121,7 +116,9 @@ public class ArtistaController {
             artistaRepo.save(artista);
 
             model.addAttribute("idArtista", idArtista);
-            model.addAttribute("cancion", new Canciones()); // Limpiar campos
+            model.addAttribute("cancion", new Canciones()); // Para limpiar campos
+
+
             model.addAttribute("cancionCreada", true);
             return "agregarCancion";
         }
@@ -140,39 +137,24 @@ public class ArtistaController {
 
     //Levar hacia la interfaz para añadir un nuevo fanatico
     @GetMapping("/agregarFanatico")
-    public String agregarFanaticos() {
+    public String agregarFanaticos(Model model) {
+        model.addAttribute("fanatico", new Fanaticos());
         return "agregarFanatico";
     }
 
     @PostMapping("/ingresarFanatico")
-    public String ingresarFanatico(Model model,
-                          @RequestParam(required=true, name ="nombreFanatico") String nombreFanatico,
-                          @RequestParam(required=true, name ="paisOrigen") String paisOrigen,
-                          @RequestParam(required=true, name ="edad") Integer edad,
-                          @RequestParam(required=true, name ="fechaRegistro") String fechaRegistro,
-                          @RequestParam(required=true, name ="plataforma") PlataformaFavorita plataforma) {
+    public String ingresarFanatico(@Valid @ModelAttribute("fanatico") Fanaticos fanatico,
+                                   BindingResult fanaticoBindingResult,
+                                   Model model){
 
-        String[] partes = fechaRegistro.split("-");
-
-        LocalDate fecha = LocalDate.of(Integer.valueOf(partes[0]),
-                Integer.valueOf(partes[1]),
-                Integer.valueOf(partes[2]));
-
-        //implementé este metodo para evitar error de fecha
-        LocalDateTime fechaCompleta = fecha.atStartOfDay();
-
-        Fanaticos fanatico = new Fanaticos();
-        fanatico.setNombreFanatico(nombreFanatico);
-        fanatico.setPaisOrigen(paisOrigen);
-        fanatico.setEdad(edad);
-        fanatico.setFechaRegistro(fechaCompleta);
-        fanatico.setPlataforma(plataforma);
+        if (fanaticoBindingResult.hasErrors()) {
+            return "agregarFanatico";
+        }
 
         fanaticosRepo.save(fanatico);
-
         model.addAttribute("fanaticos", fanaticosRepo.findAll());
-
-        return "menuFanaticos";
+        model.addAttribute("fanaticoCreado", true); // ✅ Mensaje cuando fanatico sea creado con exito
+        return "agregarFanatico";
     }
 
     @GetMapping("/verFanaticos")

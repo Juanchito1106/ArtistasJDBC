@@ -15,27 +15,35 @@
 
     <form method="post" action="/artistas/ingresarFanatico">
 
-        <div class="input-con-label">
+        <div th:object="${fanatico}" class="input-con-label">
             <label for="nombreFanatico">Nombre del Fanático:</label>
             <input id="nombreFanatico" name="nombreFanatico" type="text" placeholder="Nombre del Fanático" />
+            <span th:if="${#fields.hasErrors('nombreFanatico')}"
+                  th:errors="*{nombreFanatico}" class="error"></span>
         </div>
 
-        <div class="input-con-label">
+        <div th:object="${fanatico}" class="input-con-label">
             <label for="paisOrigen">País de Origen:</label>
             <input id="paisOrigen" name="paisOrigen" type="text" placeholder="País del Fanático" />
+            <span th:if="${#fields.hasErrors('paisOrigen')}"
+                  th:errors="*{paisOrigen}" class="error"></span>
         </div>
 
-        <div class="input-con-label">
+        <div th:object="${fanatico}" class="input-con-label">
             <label for="edad">Edad:</label>
             <input id="edad" name="edad" type="number" placeholder="Edad del Fanático" />
+            <span th:if="${#fields.hasErrors('edad')}"
+                  th:errors="*{edad}" class="error"></span>
         </div>
 
-        <div class="input-con-label">
+        <div th:object="${fanatico}" class="input-con-label">
             <label for="fechaRegistro">Fecha de registro:</label>
             <input id="fechaRegistro" name="fechaRegistro" type="date" />
+            <span th:if="${#fields.hasErrors('fechaRegistro')}"
+                  th:errors="*{fechaRegistro}" class="error"></span>
         </div>
 
-        <div class="input-con-label">
+        <div th:object="${fanatico}" class="input-con-label">
             <label for="plataforma">Plataforma favorita:</label>
             <select id="plataforma" name="plataforma">
                 <option value="SPOTIFY">SPOTIFY</option>
@@ -64,6 +72,18 @@
 <form method="get" action="/artistas">
     <button id="volver">Volver</button>
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:if="${fanaticoCreado}">
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'Fanático creado correctamente.',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
+
 
 </body>
 </html>

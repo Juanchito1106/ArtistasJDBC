@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form th:action="@{/artistas/ingresar}" method="post" th:object="${dto}" class="mt-4">
+<form method="post" action="/artistas/ingresar">
 
         <div id="music-project">
             <img id="headphones" src="/Images/headphones.png" alt="headphones">
@@ -25,35 +25,35 @@
 
     <div class="div-artista">
 
-        <div class="artist-input-label">
+        <div th:object="${artista}" class="artist-input-label">
             <label>Nombre Artístico:</label>
-            <input name="name" type="text" placeholder="Nombre del artista" th:field="*{nombreArtistico}" ><br/><br/>
+            <input name="name" type="text" placeholder="Nombre del artista" th:field="*{nombreArtistico}"/>
             <span th:if="${#fields.hasErrors('nombreArtistico')}"
                   th:errors="*{nombreArtistico}" class="error"></span>
         </div>
-
-        <div class="artist-input-label">
+        <br>
+        <div th:object="${artista}" class="artist-input-label">
             <label>Edad del artista: </label>
-            <input name="edad" type="number" placeholder="Edad del artista" th:field="*{edad}" ><br/><br/>
+            <input name="edad" type="number" placeholder="Edad del artista" th:field="*{edad}"/>
             <span th:if="${#fields.hasErrors('edad')}"
                   th:errors="*{edad}" class="error"></span>
         </div>
-
-        <div class="artist-input-label">
+        <br>
+        <div th:object="${artista}" class="artist-input-label">
             <label>Fecha de nacimiento: </label>
-            <input name="fechaNacimiento" type="date"  th:field="*{fechaNacimiento}" ><br/><br/>
+            <input name="fechaNacimiento" type="date"  th:field="*{fechaNacimiento}"/>
             <span th:if="${#fields.hasErrors('fechaNacimiento')}"
                   th:errors="*{fechaNacimiento}" class="error"></span>
         </div>
-
-        <div class="artist-input-label">
+        <br>
+        <div th:object="${artista}" class="artist-input-label">
             <label>Nacionalidad:</label>
-            <input name="nacionalidad" type="text" placeholder="Nacionalidad del artista" th:field="*{nacionalidad}" ><br/><br/>
+            <input name="nacionalidad" type="text" placeholder="Nacionalidad del artista" th:field="*{nacionalidad}"/>
             <span th:if="${#fields.hasErrors('nacionalidad')}"
                   th:errors="*{nacionalidad}" class="error"></span>
         </div>
-
-        <div class="artist-input-label">
+        <br>
+        <div th:object="${artista}" class="artist-input-label">
             <label>Genero Musical del Artista: </label>
             <select name="Genero Musical" th:field="*{genero}">
                 <option value="POP">POP</option>
@@ -77,35 +77,35 @@
     <h2 id="disquera-tittle">Ingrese una nueva disquera</h2>
 
     <div class="div-disquera">
-        <div class="input-con-label">
+        <div th:object="${disquera}" class="input-con-label">
             <label>Nombre de la Disquera:</label>
-            <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}" ><br/><br/>
+            <input name="name" type="text" placeholder="Nombre de la Disquera" th:field="*{nombreDisquera}"/>
             <span th:if="${#fields.hasErrors('nombreDisquera')}"
                   th:errors="*{nombreDisquera}" class="error"></span>
         </div>
-
-        <div class="input-con-label">
+        <br>
+        <div th:object="${disquera}" class="input-con-label">
             <label>País: </label>
-            <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}" ><br/><br/>
+            <input name="pais" type="text" placeholder="Pais de la Disquera" th:field="*{pais}"/>
             <span th:if="${#fields.hasErrors('pais')}"
                   th:errors="*{pais}" class="error"></span>
         </div>
-
-        <div class="input-con-label">
+        <br>
+        <div th:object="${disquera}" class="input-con-label">
             <label>Número de artistas: </label>
-            <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}" ><br/><br/>
+            <input name="numeroArtistas" type="number"  th:field="*{numeroArtistas}"/>
             <span th:if="${#fields.hasErrors('numeroArtistas')}"
                   th:errors="*{numeroArtistas}" class="error"></span>
         </div>
-
-        <div class="input-con-label">
+        <br>
+        <div th:object="${disquera}" class="input-con-label">
             <label>Fundación:</label>
-            <input name="fundacion" type="date"  th:field="*{fundacion}" ><br/><br/>
+            <input name="fundacion" type="date"  th:field="*{fundacion}"/>
             <span th:if="${#fields.hasErrors('fundacion')}"
                   th:errors="*{fundacion}" class="error"></span>
         </div>
-
-        <div class="input-con-label">
+        <br>
+        <div th:object="${disquera}" class="input-con-label">
             <label>Tipo de Contrato:</label>
             <select name="Tipo de Contrato" th:field="*{contrato}">
                 <option value="EXCLUSIVO">EXCLUSIVO</option>
@@ -130,6 +130,19 @@
 </form>
 
     <button id="volver" onclick="location.href='/'">Volver</button>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script th:if="${artistaDisqueraCreados}">
+    Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: 'El artista con su disquera fueron creados correctamente.',
+        confirmButtonText: 'Aceptar'
+    });
+</script>
 
 </body>
 </html>
