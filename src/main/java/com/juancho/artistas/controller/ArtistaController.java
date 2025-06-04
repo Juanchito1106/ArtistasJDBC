@@ -106,9 +106,10 @@ public class ArtistaController {
                 Model model) {
 
             if (cancionBindingResult.hasErrors()) {
+
+                model.addAttribute("idArtista", idArtista);
                 return "agregarCancion";
             }
-
 
             Optional<Artista> artistaById = artistaRepo.findById(Integer.valueOf(idArtista));
             Artista artista = artistaById.orElse(new Artista());
